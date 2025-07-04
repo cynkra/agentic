@@ -99,4 +99,5 @@ IMPORTANT: There are no good safeguards in place at the moment to prevent the ll
 ```{r, eval = FALSE}
 ag <- agent()
 ag$chat("How much drive space do I have left? answer in a warning popup")
+ag$chat("I don't know where to go for my next vacation, ask me multiple choices questions and give me the best pick!")
 ```

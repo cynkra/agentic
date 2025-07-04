@@ -140,4 +140,4 @@ dims <- as.integer(unlist(regmatches(res, gregexpr("\\d+", res))))
 width <- dims[1]
 height <- dims[2]
 
-usethis::
+

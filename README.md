@@ -33,21 +33,24 @@ chat <- ellmer::chat_openai(model = "gpt-4o")
 
 # it can't know
 chat$chat("What time is it?")
-#> I'm sorry, but I can't provide real-time information. Please check the clock on
-#> your device or another source for the current time.
+#> I'm unable to provide real-time information or updates, including the current 
+#> time. You might want to check a clock or use a device like a smartphone or 
+#> computer for that information.
 
 # unless we allow it to access this info
 chat$register_tool(tool_current_time())
 
 # Ask the LLM to get the time
 chat$chat("What time is it?")
-#> Please provide your time zone, so I can tell you the current time there.
+#> ◯ [tool call] get_current_time(tz = NULL)
+#> ● #> 2025-07-04 13:49:25 UTC
+#> The current time is 13:49 (UTC) on July 4th, 2025.
 
 # oops wrong timezone
 chat$chat("I'm in Switzerland")
 #> ◯ [tool call] get_current_time(tz = "Europe/Zurich")
-#> ● #> 2025-07-04 15:37:55 CEST
-#> The current time in Switzerland (Europe/Zurich) is 15:37 (3:37 PM) on July 4, 
+#> ● #> 2025-07-04 15:49:28 CEST
+#> The current time in Switzerland (Europe/Zurich time zone) is 15:49 on July 4th,
 #> 2025.
 ```
 
@@ -66,9 +69,10 @@ system.time(
 #> ◯ [tool call] wait(t = 7L)
 #> .......
 #> ● #> {}
-#> Paused for 7 seconds. How can I assist you further?
+#> Paused for 7 seconds as requested. Let me know if there's anything else I can 
+#> do for you!
 #>    user  system elapsed 
-#>   0.391   0.007   9.434
+#>   0.389   0.007   9.384
 ```
 
 Where it gets very interesting is that the llms will combine tools and
@@ -77,14 +81,15 @@ call one several times if needed.
 ``` r
 chat$chat("give me the time, then wait 3 sec and give me the time again")
 #> ◯ [tool call] get_current_time(tz = "Europe/Zurich")
-#> ● #> 2025-07-04 15:38:07 CEST
+#> ● #> 2025-07-04 15:49:39 CEST
 #> ◯ [tool call] wait(t = 3L)
 #> ...
 #> ● #> {}
 #> ◯ [tool call] get_current_time(tz = "Europe/Zurich")
-#> ● #> 2025-07-04 15:38:11 CEST
-#> - The current time in Switzerland (Europe/Zurich) is 15:38:07 (3:38:07 PM).
-#> - After waiting for 3 seconds, the time is now 15:38:11 (3:38:11 PM).
+#> ● #> 2025-07-04 15:49:44 CEST
+#> The time before waiting was 15:49:39 (CEST).
+#> 
+#> After waiting for 3 seconds, the time is now 15:49:44 (CEST).
 ```
 
 Let’s do a fancier example, I’m typing this using cursor, and I want to
@@ -105,17 +110,31 @@ chat$chat("Find out what the hotkey is to open the find and replace widget for m
 #>   #> version
 #>   #> …
 #> ◯ [tool call] screenshot()
-#> ● #> /var/folders/mp/qvg2y_jx63bgk_s0xxh2zr140000gp/T//RtmpbTFbRv/file127cf6c0…
-#> ◯ [tool call] query_image(query = "What application is currently open in the
-#> screenshot?", img_path =
-#> "/var/folders/mp/qvg2y_jx63bgk_s0xxh2zr140000gp/T//RtmpbTFbRv/file127cf6c06e8eb.png")
+#> ● #> /var/folders/mp/qvg2y_jx63bgk_s0xxh2zr140000gp/T//Rtmp0G3s7u/file12e9d6f3…
+#> ◯ [tool call] query_image(query = "Which app is open in the screenshot?",
+#> img_path =
+#> "/var/folders/mp/qvg2y_jx63bgkk_s0xxh2zr140000gp/T//Rtmp0G3s7u/file12e9d6f3e7dac.png")
+#> ■ #> Error:
+#>   #>
+#> /var/folders/mp/qvg2y_jx63bgkk_s0xxh2zr140000gp/T//Rtmp0G3s7u/file12e9d6f3e7dac.png
+#>   #> must be an existing file.
+#> It seems there was an issue with accessing the screenshot to determine the open
+#> application. Let me retake the screenshot and query the image again.
+#> ◯ [tool call] screenshot()
+#> ● #> /var/folders/mp/qvg2y_jx63bgk_s0xxh2zr140000gp/T//Rtmp0G3s7u/file12e9d6fa…
+#> ◯ [tool call] query_image(query = "Which app is open in the screenshot?",
+#> img_path =
+#> "/var/folders/mp/qvg2y_jx63bgk_s0xxh2zr140000gp/T//Rtmp0G3s7u/file12e9d6face042.png")
 #> ● #> <Turn: assistant>
-#>   #> The application open in the screenshot is Visual Studio Code.
-#> ◯ [tool call] keypress(key = "f", control = TRUE, command = NULL, shift = TRUE,
-#> option = FALSE, fn = NULL)
+#>   #> The app open in the screenshot is Visual Studio Code.
+#> For Visual Studio Code on macOS, the hotkey to open the Find and Replace widget
+#> is usually `Command` + `Option` + `F`. I will now simulate this keypress for 
+#> you.
+#> ◯ [tool call] keypress(key = "f", control = NULL, command = TRUE, shift = NULL,
+#> option = TRUE, fn = NULL)
 #> ● #> true
-#> I have triggered the hotkey for opening the "Find and Replace" widget in Visual
-#> Studio Code on macOS, which is `Command` + `Shift` + `F`.
+#> I've triggered the "Find and Replace" hotkey for Visual Studio Code. You should
+#> now see the widget open in the app.
 ```
 
 Here’s a list of the current tools.
@@ -139,4 +158,5 @@ careful!
 ``` r
 ag <- agent()
 ag$chat("How much drive space do I have left? answer in a warning popup")
+ag$chat("I don't know where to go for my next vacation, ask me multiple choices questions and give me the best pick!")
 ```
