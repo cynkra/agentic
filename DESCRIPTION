@@ -13,3 +13,5 @@ Imports:
     ellmer,
     magick,
     utils
+URL: https://github.com/cynkra/agentic
+BugReports: https://github.com/cynkra/agentic/issues
