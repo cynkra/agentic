@@ -8,7 +8,7 @@ on mac
 
 `agentic` provides a set of R functions to enhance the interaction of
 large language models (LLMs) with your system. It is designed to work
-with the [`ellmer`](https://github.com/tdyverse/ellmer) package and
+with the [`ellmer`](https://github.com/tidyverse/ellmer) package and
 enables LLMs to access the clipboard, files, mouse, system information,
 and more. This makes it easy to build powerful, interactive agents in R.
 
