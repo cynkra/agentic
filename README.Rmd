@@ -1,0 +1,102 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# agentic
+
+Warning: Experimental, potentially unsafe, and many functions work only on mac
+
+`agentic` provides a set of R functions to enhance the interaction of large language models (LLMs) with your system. 
+It is designed to work with the [`ellmer`](https://github.com/tdyverse/ellmer) package and
+enables LLMs to access the clipboard, files, mouse, system information, and more. 
+This makes it easy to build powerful, interactive agents in R.
+
+## Installation
+
+You can install the development version of agentic from GitHub with:
+
+```r
+pak::pak("cynkra/agentic")
+```
+
+## Example
+
+LLMs don't know anything about your system, you could tell them, or you could give them tools to fetch the info themselves.
+
+```{r}
+library(agentic)
+
+# Create a chat instance with OpenAI
+chat <- ellmer::chat_openai(model = "gpt-4o")
+
+# it can't know
+chat$chat("What time is it?")
+
+# unless we allow it to access this info
+chat$register_tool(tool_current_time())
+
+# Ask the LLM to get the time
+chat$chat("What time is it?")
+
+# oops wrong timezone
+chat$chat("I'm in Switzerland")
+```
+
+Tools can do more than provide context, they can do side effects, these includes running terminal commands, taking screenshots, clicking etc.
+
+Or simply wait as we do bellow:
+
+```{r}
+chat$register_tool(tool_wait())
+
+# there's a little overhead of course
+system.time(
+  chat$chat("pause for 7 seconds")
+)
+```
+
+Where it gets very interesting is that the llms will combine tools and call one several times if needed.
+
+```{r}
+chat$chat("give me the time, then wait 3 sec and give me the time again")
+```
+
+Let's do a fancier example, I'm typing this using cursor, and I want to make sure all my files are saved
+
+```{r}
+chat <- ellmer::chat_openai(model = "gpt-4o")
+chat$register_tool(tool_screenshot())   # to be able to take a screenshot
+chat$register_tool(tool_query_image())  # to be able to analyse the screenshot
+chat$register_tool(tool_system_info())  # to be able to request system info
+chat$register_tool(tool_keypress())     # to be able to use hotkeys
+chat$chat("Find out what the hotkey is to open the find and replace widget for my app and system, then trigger it")
+```
+
+Here's a list of the current tools.
+
+```{r}
+grep("^tool_", getNamespaceExports("agentic"))
+```
+
+## putting it all together
+
+If you don't feel like registering manually all tools and are not afraid of your system gaining sentience you might use the `agent()` function.
+It is just like `ellmer::chat_*()` functions (defaulting on chatgpt), but has all the tools of this package preregistered.
+
+IMPORTANT: There are no good safeguards in place at the moment to prevent the llm to write or remove files, format your drive etc. Be careful!
+
+```{r, eval = FALSE}
+ag <- agent()
+ag$chat("How much drive space do I have left? answer in a warning popup")
+```
