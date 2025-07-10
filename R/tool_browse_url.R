@@ -22,7 +22,7 @@ tool_browse_url <- function() {
     browse_url,
     "Browse to the given URL",
     url = type_string("A valid URL"),
-    browser = typestring("Name of the browser to use"),
+    browser = type_string("Name of the browser to use"),
     .annotations = tool_annotations(
       title = "Browse URL",
       read_only_hint = TRUE,
