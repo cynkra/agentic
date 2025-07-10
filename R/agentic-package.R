@@ -3,6 +3,7 @@
 
 ## usethis namespace: start
 #' @importFrom ellmer tool
+#' @importFrom ellmer tool_annotations
 #' @importFrom ellmer type_array
 #' @importFrom ellmer type_boolean
 #' @importFrom ellmer type_enum
