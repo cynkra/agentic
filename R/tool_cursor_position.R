@@ -12,6 +12,13 @@ cursor_position <- function(x = NULL, y = NULL) {
 tool_cursor_position <- function() {
   tool(
     cursor_position,
-    "Gets the current mouse cursor position."
+    "Gets the current mouse cursor position.",
+    .annotations = tool_annotations(
+      title = "Cursor Position",
+      read_only_hint = TRUE,
+      open_world_hint = FALSE,
+      idempotent_hint = TRUE,
+      destructive_hint = FALSE
+    )
   )
 }

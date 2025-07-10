@@ -23,6 +23,13 @@ tool_left_click <- function() {
     y = type_integer(
       "The y coordinate for the click. If not provided, uses the current y position.",
       required = FALSE
+    ),
+    .annotations = tool_annotations(
+      title = "Left Mouse Click",
+      read_only_hint = FALSE,
+      open_world_hint = FALSE,
+      idempotent_hint = FALSE,
+      destructive_hint = TRUE
     )
   )
 }

@@ -19,6 +19,13 @@ tool_run_r_command <- function() {
     expr = type_string(
       "The R command (expression) to run.",
       required = TRUE
+    ),
+    .annotations = tool_annotations(
+      title = "Run R Command",
+      read_only_hint = FALSE,
+      open_world_hint = TRUE,
+      idempotent_hint = FALSE,
+      destructive_hint = TRUE
     )
   )
 }

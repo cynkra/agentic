@@ -18,6 +18,13 @@ tool_run_terminal_command <- function() {
     command = type_string(
       "The shell command to run.",
       required = TRUE
+    ),
+    .annotations = tool_annotations(
+      title = "Run Terminal Command",
+      read_only_hint = FALSE,
+      open_world_hint = TRUE,
+      idempotent_hint = FALSE,
+      destructive_hint = TRUE
     )
   )
 }

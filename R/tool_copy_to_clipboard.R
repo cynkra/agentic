@@ -17,6 +17,13 @@ tool_copy_to_clipboard <- function() {
     text = type_string(
       "The text to copy to the clipboard.",
       required = TRUE
+    ),
+    .annotations = tool_annotations(
+      title = "Copy to Clipboard",
+      read_only_hint = FALSE,
+      open_world_hint = FALSE,
+      idempotent_hint = TRUE,
+      destructive_hint = TRUE
     )
   )
 }

@@ -15,6 +15,13 @@ tool_multiple_choices <- function() {
     choices = type_array(
       "possible choices",
       items = type_string("A choice")
+    ),
+    .annotations = tool_annotations(
+      title = "Multiple Choice Input",
+      read_only_hint = TRUE,
+      open_world_hint = FALSE,
+      idempotent_hint = TRUE,
+      destructive_hint = FALSE
     )
   )
 }

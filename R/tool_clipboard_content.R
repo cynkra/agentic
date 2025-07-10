@@ -12,6 +12,13 @@ clipboard_content <- function() {
 tool_clipboard_content <- function() {
   tool(
     clipboard_content,
-    "Gets the current content of the system clipboard as a string."
+    "Gets the current content of the system clipboard as a string.",
+    .annotations = tool_annotations(
+      title = "Clipboard Content",
+      read_only_hint = TRUE,
+      open_world_hint = FALSE,
+      idempotent_hint = TRUE,
+      destructive_hint = FALSE
+    )
   )
 }

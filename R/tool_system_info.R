@@ -9,6 +9,13 @@ system_info <- function() {
 tool_system_info <- function() {
   tool(
     system_info,
-    "Returns the system information as a string."
+    "Returns the system information as a string.",
+    .annotations = tool_annotations(
+      title = "System Info",
+      read_only_hint = TRUE,
+      open_world_hint = FALSE,
+      idempotent_hint = TRUE,
+      destructive_hint = FALSE
+    )
   )
 } 

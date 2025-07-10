@@ -11,6 +11,13 @@ screenshot <- function(file = tempfile(fileext = ".png")) {
 tool_screenshot <- function() {
   tool(
     screenshot,
-    "Takes a screenshot if the system allows and returns the path to the png file of the screenshot. Can be used when we need context about which app is open for instance."
+    "Takes a screenshot if the system allows and returns the path to the png file of the screenshot. Can be used when we need context about which app is open for instance.",
+    .annotations = tool_annotations(
+      title = "Screenshot",
+      read_only_hint = FALSE,
+      open_world_hint = FALSE,
+      idempotent_hint = FALSE,
+      destructive_hint = FALSE
+    )
   )
 }
