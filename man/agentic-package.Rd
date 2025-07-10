@@ -8,6 +8,14 @@
 \description{
 A set of functions that can be used to enhance the interaction of LLMs with the system, and in particular tools to use smoothly with the 'ellmer' package.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/cynkra/agentic}
+  \item Report bugs at \url{https://github.com/cynkra/agentic/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Antoine Fabri \email{antoine.fabri@gmail.com}
 
