@@ -60,6 +60,13 @@ tool_keypress <- function() {
     command = type_boolean("Whether to hold the Command key", required = FALSE),
     shift = type_boolean("Whether to hold the Shift key", required = FALSE),
     option = type_boolean("Whether to hold the Option/Alt key", required = FALSE),
-    fn = type_boolean("Whether to hold the Fn key", required = FALSE)
+    fn = type_boolean("Whether to hold the Fn key", required = FALSE),
+    .annotations = tool_annotations(
+      title = "Keypress",
+      read_only_hint = FALSE,
+      open_world_hint = FALSE,
+      idempotent_hint = FALSE,
+      destructive_hint = TRUE
+    )
   )
 }

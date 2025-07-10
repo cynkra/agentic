@@ -17,6 +17,13 @@ tool_wait <- function() {
     t = type_integer(
       "Number of seconds to wait",
       required = TRUE
+    ),
+    .annotations = tool_annotations(
+      title = "Wait",
+      read_only_hint = TRUE,
+      open_world_hint = FALSE,
+      idempotent_hint = FALSE,
+      destructive_hint = FALSE
     )
   )
 }

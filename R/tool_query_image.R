@@ -24,6 +24,13 @@ tool_query_image <- function() {
     img_path = type_string(
       "The path of the image use to answer the query",
       required = TRUE
+    ),
+    .annotations = tool_annotations(
+      title = "Query Image",
+      read_only_hint = TRUE,
+      open_world_hint = FALSE,
+      idempotent_hint = TRUE,
+      destructive_hint = FALSE
     )
   )
 }

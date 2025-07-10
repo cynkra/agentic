@@ -47,6 +47,13 @@ tool_popup <- function() {
     message = type_string("The message to display in the popup.", required = TRUE),
     title = type_string("The title of the popup window.", required = FALSE),
     type = type_enum("The type of popup.", c("info", "warning", "error", "question"), required = FALSE),
-    buttons = type_array("Button labels to show (optional)", items = type_string("A button label"), required = FALSE)
+    buttons = type_array("Button labels to show (optional)", items = type_string("A button label"), required = FALSE),
+    .annotations = tool_annotations(
+      title = "Popup",
+      read_only_hint = TRUE,
+      open_world_hint = FALSE,
+      idempotent_hint = TRUE,
+      destructive_hint = FALSE
+    )
   )
 }

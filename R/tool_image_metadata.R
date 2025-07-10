@@ -20,6 +20,13 @@ tool_image_metadata <- function() {
   tool(
     image_metadata,
     "Returns image metadata (width, height, format, colorspace, filesize) for a given image file.",
-    path = type_string("The path to the image file.", required = TRUE)
+    path = type_string("The path to the image file.", required = TRUE),
+    .annotations = tool_annotations(
+      title = "Image Metadata",
+      read_only_hint = TRUE,
+      open_world_hint = FALSE,
+      idempotent_hint = TRUE,
+      destructive_hint = FALSE
+    )
   )
 } 

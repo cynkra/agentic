@@ -13,6 +13,13 @@ tool_current_time <- function() {
     tz = type_string(
       "The time zone to get the current time in. Defaults to 'UTC'.",
       required = FALSE
+    ),
+    .annotations = tool_annotations(
+      title = "Current Time",
+      read_only_hint = TRUE,
+      open_world_hint = FALSE,
+      idempotent_hint = FALSE,
+      destructive_hint = FALSE
     )
   )
 } 

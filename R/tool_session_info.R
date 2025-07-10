@@ -9,6 +9,13 @@ session_info <- function() {
 tool_session_info <- function() {
   tool(
     session_info,
-    "Returns the R session information as a string."
+    "Returns the R session information as a string.",
+    .annotations = tool_annotations(
+      title = "R Session Info",
+      read_only_hint = TRUE,
+      open_world_hint = FALSE,
+      idempotent_hint = TRUE,
+      destructive_hint = FALSE
+    )
   )
 } 

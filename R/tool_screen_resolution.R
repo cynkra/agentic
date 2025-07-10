@@ -26,6 +26,13 @@ screen_resolution <- function() {
 tool_screen_resolution <- function() {
   tool(
     screen_resolution,
-    "Returns the screen resolution as a list with width and height in pixels."
+    "Returns the screen resolution as a list with width and height in pixels.",
+    .annotations = tool_annotations(
+      title = "Screen Resolution",
+      read_only_hint = TRUE,
+      open_world_hint = FALSE,
+      idempotent_hint = TRUE,
+      destructive_hint = FALSE
+    )
   )
 } 
