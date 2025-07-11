@@ -17,3 +17,10 @@ The transcribed text.
 \description{
 Converts speech in an audio file to text using OpenAI's Whisper API.
 }
+\examples{
+\dontrun{
+  chat <- ellmer::chat_openai()
+  chat$register_tool(tool_speech_to_text())
+  chat$chat("Transcribe the audio file 'path/to/audio.wav'")
+}
+}

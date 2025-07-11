@@ -9,3 +9,10 @@ tool_copy_to_clipboard()
 \description{
 Returns a tool object for copying text to the system clipboard.
 }
+\examples{
+\dontrun{
+  chat <- ellmer::chat_openai()
+  chat$register_tool(tool_copy_to_clipboard())
+  chat$chat("Copy 'hello world' to the clipboard")
+}
+}

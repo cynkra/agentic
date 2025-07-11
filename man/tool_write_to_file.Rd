@@ -13,6 +13,10 @@ A tool object
 Returns a tool for writing a character string to a flat file at the specified path.
 }
 \examples{
-tool <- tool_write_to_file()
-tool$run(path = tempfile(), content = "hello")
+\dontrun{
+  chat <- ellmer::chat_openai()
+  chat$register_tool(tool_write_to_file())
+  tmp <- tempfile()
+  chat$chat(paste("Write 'hello' to the file", tmp))
+}
 }

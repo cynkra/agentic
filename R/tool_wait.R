@@ -9,6 +9,12 @@ wait <- function(t) {
 #' Tool: Wait
 #'
 #' Returns a tool object for waiting a specified number of seconds.
+#' @examples
+#' \dontrun{
+#'   chat <- ellmer::chat_openai()
+#'   chat$register_tool(tool_wait())
+#'   chat$chat("Wait for 2 seconds")
+#' }
 #' @export
 tool_wait <- function() {
   tool(

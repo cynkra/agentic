@@ -2,6 +2,19 @@ file_rename <- function(from, to) {
   file.rename(from, to)
 }
 
+#' Tool: File Rename
+#'
+#' Renames or moves a file from one path to another. Returns TRUE if successful.
+#' @examples
+#' \dontrun{
+#'   chat <- ellmer::chat_openai()
+#'   chat$register_tool(tool_file_rename())
+#'   src <- tempfile()
+#'   dest <- tempfile()
+#'   writeLines("rename me", src)
+#'   chat$chat(paste("Rename the file", src, "to", dest))
+#' }
+#' @export
 tool_file_rename <- function() {
   tool(
     file_rename,

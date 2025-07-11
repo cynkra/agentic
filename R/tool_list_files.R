@@ -19,4 +19,11 @@ tool_list_files <- function() {
       destructive_hint = FALSE
     )
   )
-} 
+}
+
+#' @examples
+#' \dontrun{
+#'   chat <- ellmer::chat_openai()
+#'   chat$register_tool(tool_list_files())
+#'   chat$chat("List the files in the current directory")
+#' } 

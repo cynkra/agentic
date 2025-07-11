@@ -9,3 +9,10 @@ tool_left_click()
 \description{
 Returns a tool object for performing a left mouse click at the given (x, y) screen coordinates.
 }
+\examples{
+\dontrun{
+  chat <- ellmer::chat_openai()
+  chat$register_tool(tool_left_click())
+  chat$chat("Click at position 100, 200")
+}
+}

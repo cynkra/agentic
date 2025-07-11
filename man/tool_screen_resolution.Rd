@@ -9,3 +9,10 @@ tool_screen_resolution()
 \description{
 Returns a tool object for getting the screen resolution (width and height in pixels).
 }
+\examples{
+\dontrun{
+  chat <- ellmer::chat_openai()
+  chat$register_tool(tool_screen_resolution())
+  chat$chat("What is the screen resolution?")
+}
+}

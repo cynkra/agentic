@@ -5,6 +5,12 @@ system_info <- function() {
 #' Tool: System info
 #'
 #' Returns a tool object for getting the system information as a string.
+#' @examples
+#' \dontrun{
+#'   chat <- ellmer::chat_openai()
+#'   chat$register_tool(tool_system_info())
+#'   chat$chat("Show the system info")
+#' }
 #' @export
 tool_system_info <- function() {
   tool(

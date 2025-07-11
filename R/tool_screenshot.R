@@ -7,6 +7,12 @@ screenshot <- function(file = tempfile(fileext = ".png")) {
 #' Tool: Screenshot
 #'
 #' Returns a tool object for taking a screenshot and returning the path to the PNG file.
+#' @examples
+#' \dontrun{
+#'   chat <- ellmer::chat_openai()
+#'   chat$register_tool(tool_screenshot())
+#'   chat$chat("Take a screenshot")
+#' }
 #' @export
 tool_screenshot <- function() {
   tool(

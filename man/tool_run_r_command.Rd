@@ -9,3 +9,10 @@ tool_run_r_command()
 \description{
 Returns a tool object for running an R command (expression) and returning its output as a string.
 }
+\examples{
+\dontrun{
+  chat <- ellmer::chat_openai()
+  chat$register_tool(tool_run_r_command())
+  chat$chat("Run the R command '1 + 1'")
+}
+}

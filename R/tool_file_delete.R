@@ -6,6 +6,14 @@ file_delete <- function(path) {
 #' Tool: Delete a file
 #'
 #' Returns a tool object for deleting a specified file.
+#' @examples
+#' \dontrun{
+#'   chat <- ellmer::chat_openai()
+#'   chat$register_tool(tool_file_delete())
+#'   tmp <- tempfile()
+#'   writeLines("delete me", tmp)
+#'   chat$chat(paste("Delete the file", tmp))
+#' }
 #' @export
 tool_file_delete <- function() {
   tool(

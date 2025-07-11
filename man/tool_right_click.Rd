@@ -9,3 +9,10 @@ tool_right_click()
 \description{
 Returns a tool object for performing a right mouse click at the given (x, y) screen coordinates.
 }
+\examples{
+\dontrun{
+  chat <- ellmer::chat_openai()
+  chat$register_tool(tool_right_click())
+  chat$chat("Right click at position 100, 200")
+}
+}

@@ -15,3 +15,10 @@ The text entered by the user.
 \description{
 Prompts the user for text input and returns it as a string.
 }
+\examples{
+\dontrun{
+  chat <- ellmer::chat_openai()
+  chat$register_tool(tool_text_input())
+  chat$chat("Ask the user for their name")
+}
+}

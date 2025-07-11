@@ -9,3 +9,10 @@ tool_system_info()
 \description{
 Returns a tool object for getting the system information as a string.
 }
+\examples{
+\dontrun{
+  chat <- ellmer::chat_openai()
+  chat$register_tool(tool_system_info())
+  chat$chat("Show the system info")
+}
+}

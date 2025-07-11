@@ -9,3 +9,10 @@ tool_session_info()
 \description{
 Returns a tool object for getting the R session information as a string.
 }
+\examples{
+\dontrun{
+  chat <- ellmer::chat_openai()
+  chat$register_tool(tool_session_info())
+  chat$chat("Show the R session info")
+}
+}

@@ -10,6 +10,12 @@ run_terminal_command <- function(command, ask = TRUE) {
 #' Tool: Run terminal command
 #'
 #' Returns a tool object for running a shell command in the system terminal and returning its output as a string.
+#' @examples
+#' \dontrun{
+#'   chat <- ellmer::chat_openai()
+#'   chat$register_tool(tool_run_terminal_command())
+#'   chat$chat("Run the command 'echo hello'")
+#' }
 #' @export
 tool_run_terminal_command <- function() {
   tool(

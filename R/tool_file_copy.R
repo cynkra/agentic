@@ -20,4 +20,14 @@ tool_file_copy <- function() {
       destructive_hint = TRUE
     )
   )
-} 
+}
+
+#' @examples
+#' \dontrun{
+#'   chat <- ellmer::chat_openai()
+#'   chat$register_tool(tool_file_copy())
+#'   src <- tempfile()
+#'   dest <- tempfile()
+#'   writeLines("hello", src)
+#'   chat$chat(paste("Copy the file from", src, "to", dest))
+#' } 
