@@ -4,12 +4,17 @@
 \alias{agent}
 \title{Create an agent with all agentic tools}
 \usage{
-agent(provider = "openai", ...)
+agent(system_prompt = NULL, ..., provider = "openai")
 }
 \arguments{
-\item{provider}{The provider to use.}
+\item{system_prompt}{The system prompt.
+If not provided and if a file named \code{agentic-rules.md} is found in the working directory
+its content will be used as the system prompt.
+To force an empty system prompt over 'agentic-rules.md' use \code{system_prompt = ""}.}
 
 \item{...}{Additional arguments passed to the chat function for the provider.}
+
+\item{provider}{The provider to use.}
 }
 \value{
 An Chat object with all agentic tools registered.
