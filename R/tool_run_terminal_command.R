@@ -1,8 +1,9 @@
 run_terminal_command <- function(command, ask = TRUE) {
-  # if (ask) {
-  #   ans <- askYesNo(sprintf("Do you agree to run `%s`", command))
-  #   if (!isTRUE(ans)) stop("Interrupted by used")
-  # }
+  #browser()
+  if (ask) {
+    ans <- askYesNo(sprintf("Do you agree to run `%s`", command))
+    if (!isTRUE(ans)) tool_reject()
+  }
   output <- system(command, intern = TRUE)
   paste(output, collapse = "\n")
 }
@@ -17,7 +18,10 @@ run_terminal_command <- function(command, ask = TRUE) {
 #'   chat$chat("Run the command 'echo hello'")
 #' }
 #' @export
-tool_run_terminal_command <- function() {
+tool_run_terminal_command <- function(ask = TRUE) {
+  run_terminal_command <- function(command) {
+    agentic:::run_terminal_command(command, ask = ask)
+  }
   tool(
     run_terminal_command,
     "Runs a shell command in the system terminal and returns its output as a string.",
