@@ -11,7 +11,6 @@ text_input <- function(prompt = "Please enter text:") {
 #'   chat$register_tool(tool_text_input())
 #'   chat$chat("Ask the user for their name")
 #' }
-#' @param prompt The prompt to display to the user.
 #' @return The text entered by the user.
 #' @export
 tool_text_input <- function() {

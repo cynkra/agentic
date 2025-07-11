@@ -6,9 +6,6 @@
 \usage{
 tool_text_input()
 }
-\arguments{
-\item{prompt}{The prompt to display to the user.}
-}
 \value{
 The text entered by the user.
 }

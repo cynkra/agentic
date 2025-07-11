@@ -6,13 +6,6 @@
 \usage{
 tool_text_to_speech()
 }
-\arguments{
-\item{text}{The text to convert to speech.}
-
-\item{voice}{The voice to use (e.g., "alloy", "echo", "fable", "onyx", "nova", "shimmer").}
-
-\item{output_file}{The path to save the output audio file (mp3).}
-}
 \value{
 The path to the saved audio file.
 }

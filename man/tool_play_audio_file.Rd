@@ -6,9 +6,6 @@
 \usage{
 tool_play_audio_file()
 }
-\arguments{
-\item{file}{The path to the audio file to play.}
-}
 \value{
 TRUE (invisible)
 }

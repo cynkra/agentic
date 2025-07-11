@@ -28,9 +28,6 @@
 #' Tool: Text to Speech (OpenAI Whisper API)
 #'
 #' Converts text to speech using OpenAI's TTS API (tts-1).
-#' @param text The text to convert to speech.
-#' @param voice The voice to use (e.g., "alloy", "echo", "fable", "onyx", "nova", "shimmer").
-#' @param output_file The path to save the output audio file (mp3).
 #' @return The path to the saved audio file.
 #' @export
 tool_text_to_speech <- function() {

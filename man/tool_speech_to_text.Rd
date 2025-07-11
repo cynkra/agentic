@@ -6,11 +6,6 @@
 \usage{
 tool_speech_to_text()
 }
-\arguments{
-\item{file}{The complete absolute path to the audio file to transcribe.}
-
-\item{model}{The Whisper model to use (default: 'whisper-1').}
-}
 \value{
 The transcribed text.
 }
