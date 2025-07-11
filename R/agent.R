@@ -16,7 +16,7 @@ agent <- function(..., provider = "openai") {
     agentic_ns <- asNamespace("agentic")
     tools <- ls(agentic_ns, pattern = "^tool_")
 
-    ag <- do.call(chat_fun, list(...), envir = globalenv())
+    ag <- chat_fun(..., echo = "output")
     for (tool in tools) {
       ag$register_tool(agentic_ns[[tool]]())
     }
