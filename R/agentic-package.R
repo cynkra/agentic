@@ -10,6 +10,7 @@
 #' @importFrom ellmer type_integer
 #' @importFrom ellmer type_string
 #' @importFrom utils askYesNo
+#' @importFrom utils browseURL
 #' @importFrom utils capture.output
 #' @importFrom utils getFromNamespace
 #' @importFrom utils sessionInfo
