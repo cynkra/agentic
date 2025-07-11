@@ -27,8 +27,6 @@ record_audio <- function(file = tempfile(fileext=".wav")) {
 #' Tool: Record Audio
 #'
 #' Records audio from the system microphone and saves it to a file.
-#' @param output_file The path to save the recorded audio file (e.g., .wav or .mp3).
-#' @param duration The duration of the recording in seconds.
 #' @return The path to the saved audio file.
 #' @export
 tool_record_audio <- function() {
