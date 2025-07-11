@@ -9,3 +9,10 @@ tool_working_directory()
 \description{
 Returns a tool object for getting the current working directory.
 }
+\examples{
+\dontrun{
+  chat <- ellmer::chat_openai()
+  chat$register_tool(tool_working_directory())
+  chat$chat("What is the current working directory?")
+}
+}

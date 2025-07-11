@@ -34,3 +34,14 @@ tool_query_image <- function() {
     )
   )
 }
+
+#' @examples
+#' \dontrun{
+#'   chat <- ellmer::chat_openai()
+#'   chat$register_tool(tool_query_image())
+#'   tmp_img <- tempfile(fileext = ".png")
+#'   png(tmp_img)
+#'   plot(1:10)
+#'   dev.off()
+#'   chat$chat(paste("What is shown in this image?", tmp_img))
+#' }

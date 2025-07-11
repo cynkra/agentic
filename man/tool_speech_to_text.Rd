@@ -6,14 +6,16 @@
 \usage{
 tool_speech_to_text()
 }
-\arguments{
-\item{file}{The complete absolute path to the audio file to transcribe.}
-
-\item{model}{The Whisper model to use (default: 'whisper-1').}
-}
 \value{
 The transcribed text.
 }
 \description{
 Converts speech in an audio file to text using OpenAI's Whisper API.
+}
+\examples{
+\dontrun{
+  chat <- ellmer::chat_openai()
+  chat$register_tool(tool_speech_to_text())
+  chat$chat("Transcribe the audio file 'path/to/audio.wav'")
+}
 }

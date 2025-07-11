@@ -50,6 +50,12 @@ keypress <- function(key, control = FALSE, command = FALSE, shift = FALSE, optio
 #' Tool: Keypress
 #'
 #' Returns a tool object for simulating a keypress (with optional modifiers).
+#' @examples
+#' \dontrun{
+#'   chat <- ellmer::chat_openai()
+#'   chat$register_tool(tool_keypress())
+#'   chat$chat("Press the Enter key")
+#' }
 #' @export
 tool_keypress <- function() {
   tool(

@@ -9,3 +9,10 @@ tool_current_time()
 \description{
 Returns a tool object for getting the current time in the given time zone.
 }
+\examples{
+\dontrun{
+  chat <- ellmer::chat_openai()
+  chat$register_tool(tool_current_time())
+  chat$chat("What is the current time?")
+}
+}

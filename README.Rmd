@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 Warning: Experimental, potentially unsafe, and many functions work only on mac
 
 `agentic` provides a set of R functions to enhance the interaction of large language models (LLMs) with your system. 
-It is designed to work with the [`ellmer`](https://github.com/tdyverse/ellmer) package and
+It is designed to work with the [`ellmer`](https://github.com/tidyverse/ellmer) package and
 enables LLMs to access the clipboard, files, mouse, system information, and more. 
 This makes it easy to build powerful, interactive agents in R.
 
@@ -72,7 +72,8 @@ Where it gets very interesting is that the llms will combine tools and call one 
 chat$chat("give me the time, then wait 3 sec and give me the time again")
 ```
 
-Let's do a fancier example, I'm typing this using cursor, and I want to make sure all my files are saved
+Let's do a fancier example, I'm typing this using cursor, and I want to use the find and replace feature. 
+You'll notice the wording is very specific, sometimes to make it work reliably it's necessary to play around a bit.
 
 ```{r}
 chat <- ellmer::chat_openai(model = "gpt-4o")
@@ -80,13 +81,13 @@ chat$register_tool(tool_screenshot())   # to be able to take a screenshot
 chat$register_tool(tool_query_image())  # to be able to analyse the screenshot
 chat$register_tool(tool_system_info())  # to be able to request system info
 chat$register_tool(tool_keypress())     # to be able to use hotkeys
-chat$chat("Find out what the hotkey is to open the find and replace widget for my app and system, then trigger it")
+chat$chat("First find out what is the hotkey to open the global find and replace widget for my app and system, then and only then use a tool as a second step to trigger it")
 ```
 
 Here's a list of the current tools.
 
 ```{r}
-grep("^tool_", getNamespaceExports("agentic"))
+grep("^tool_", getNamespaceExports("agentic"), value = TRUE)
 ```
 
 ## putting it all together
@@ -99,5 +100,5 @@ IMPORTANT: There are no good safeguards in place at the moment to prevent the ll
 ```{r, eval = FALSE}
 ag <- agent()
 ag$chat("How much drive space do I have left? answer in a warning popup")
-ag$chat("I don't know where to go for my next vacation, ask me multiple choices questions and give me the best pick!")
+ag$chat("I don't know where to go for my next vacation, ask me interactive multiple choice questions and give me the best pick!")
 ```

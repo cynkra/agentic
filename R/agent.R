@@ -11,7 +11,7 @@
 #' ag$chat("What time is it?")
 #' @export
 agent <- function(provider = "openai", ...) {
-    chat_fun_nm <- paste0("chat_", model_family)
+    chat_fun_nm <- paste0("chat_", provider)
     chat_fun <- getFromNamespace(chat_fun_nm, "ellmer")
     agentic_ns <- asNamespace("agentic")
     tools <- ls(agentic_ns, pattern = "^tool_")

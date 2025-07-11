@@ -8,8 +8,13 @@ read_from_file <- function(path) {
 #' @return A tool object
 #' @export
 #' @examples
-#' tool <- tool_read_from_file()
-#' tool$run(path = tempfile())
+#' \dontrun{
+#'   chat <- ellmer::chat_openai()
+#'   chat$register_tool(tool_read_from_file())
+#'   tmp <- tempfile()
+#'   writeLines("hello", tmp)
+#'   chat$chat(paste("Read the file", tmp))
+#' }
 tool_read_from_file <- function() {
   tool(
     read_from_file,

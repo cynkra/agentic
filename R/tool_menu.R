@@ -6,6 +6,12 @@ multiple_choices <- function(question, choices) {
 #' Tool: Multiple choice input
 #'
 #' Returns a tool object for presenting a multiple choice question to the user.
+#' @examples
+#' \dontrun{
+#'   chat <- ellmer::chat_openai()
+#'   chat$register_tool(tool_multiple_choices())
+#'   chat$chat("Ask me to choose between apple, banana, and cherry")
+#' }
 #' @export
 tool_multiple_choices <- function() {
   tool(

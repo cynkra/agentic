@@ -6,11 +6,6 @@
 \usage{
 tool_record_audio()
 }
-\arguments{
-\item{output_file}{The path to save the recorded audio file (e.g., .wav or .mp3).}
-
-\item{duration}{The duration of the recording in seconds.}
-}
 \value{
 The path to the saved audio file.
 }

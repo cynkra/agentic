@@ -5,6 +5,12 @@ get_current_time <- function(tz = "UTC") {
 #' Tool: Current time
 #'
 #' Returns a tool object for getting the current time in the given time zone.
+#' @examples
+#' \dontrun{
+#'   chat <- ellmer::chat_openai()
+#'   chat$register_tool(tool_current_time())
+#'   chat$chat("What is the current time?")
+#' }
 #' @export
 tool_current_time <- function() {
   tool(

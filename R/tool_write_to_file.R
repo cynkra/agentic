@@ -9,8 +9,12 @@ write_to_file <- function(path, content) {
 #' @return A tool object
 #' @export
 #' @examples
-#' tool <- tool_write_to_file()
-#' tool$run(path = tempfile(), content = "hello")
+#' \dontrun{
+#'   chat <- ellmer::chat_openai()
+#'   chat$register_tool(tool_write_to_file())
+#'   tmp <- tempfile()
+#'   chat$chat(paste("Write 'hello' to the file", tmp))
+#' }
 tool_write_to_file <- function() {
   tool(
     write_to_file,

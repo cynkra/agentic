@@ -11,6 +11,12 @@ left_click <- function(x = NULL, y = NULL) {
 #' Tool: Left mouse click
 #'
 #' Returns a tool object for performing a left mouse click at the given (x, y) screen coordinates.
+#' @examples
+#' \dontrun{
+#'   chat <- ellmer::chat_openai()
+#'   chat$register_tool(tool_left_click())
+#'   chat$chat("Click at position 100, 200")
+#' }
 #' @export
 tool_left_click <- function() {
   tool(

@@ -24,8 +24,12 @@ speech_to_text <- function(file, model = "whisper-1") {
 #' Tool: Speech to Text (OpenAI Whisper API)
 #'
 #' Converts speech in an audio file to text using OpenAI's Whisper API.
-#' @param file The complete absolute path to the audio file to transcribe.
-#' @param model The Whisper model to use (default: 'whisper-1').
+#' @examples
+#' \dontrun{
+#'   chat <- ellmer::chat_openai()
+#'   chat$register_tool(tool_speech_to_text())
+#'   chat$chat("Transcribe the audio file 'path/to/audio.wav'")
+#' }
 #' @return The transcribed text.
 #' @export
 tool_speech_to_text <- function() {

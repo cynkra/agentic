@@ -11,7 +11,10 @@ RoxygenNote: 7.3.2.9000
 Imports: 
     clipr,
     ellmer,
+    httr,
+    jsonlite,
     magick,
+    processx,
     utils
 URL: https://github.com/cynkra/agentic
 BugReports: https://github.com/cynkra/agentic/issues

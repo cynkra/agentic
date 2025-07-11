@@ -45,7 +45,6 @@ play_audio_file <- function(file) {
 #' Tool: Play Audio File
 #'
 #' Opens and plays an audio file (e.g., mp3) using a command-line player and waits for playback to finish. Falls back to the system's default player if needed (may not block).
-#' @param file The path to the audio file to play.
 #' @return TRUE (invisible)
 #' @export
 tool_play_audio_file <- function() {

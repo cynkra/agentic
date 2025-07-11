@@ -9,3 +9,10 @@ tool_multiple_choices()
 \description{
 Returns a tool object for presenting a multiple choice question to the user.
 }
+\examples{
+\dontrun{
+  chat <- ellmer::chat_openai()
+  chat$register_tool(tool_multiple_choices())
+  chat$chat("Ask me to choose between apple, banana, and cherry")
+}
+}
