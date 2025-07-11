@@ -11,6 +11,9 @@
 #' ag$chat("What time is it?")
 #' @export
 agent <- function(system_prompt = NULL, ..., provider = "openai") {
+    if (is.null(system_prompt) && file.exists("agentic-rules.md")) {
+      system_prompt <- readLines("agentic-rules.md")
+    }
     chat_fun_nm <- paste0("chat_", provider)
     chat_fun <- getFromNamespace(chat_fun_nm, "ellmer")
     agentic_ns <- asNamespace("agentic")
