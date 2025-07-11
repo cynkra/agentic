@@ -4,6 +4,10 @@
 #' registers all available agentic tools, and returns the agent object.
 #'
 #' @param provider The provider to use.
+#' @param system_prompt The system prompt. 
+#'   If not provided and if a file named `agentic-rules.md` is found in the working directory
+#'   its content will be used as the system prompt. 
+#'   To force an empty system prompt over 'agentic-rules.md' use `system_prompt = ""`.
 #' @param ... Additional arguments passed to the chat function for the provider.
 #' @return An Chat object with all agentic tools registered.
 #' @examples
