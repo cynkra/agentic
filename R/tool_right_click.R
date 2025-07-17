@@ -1,4 +1,8 @@
-right_click <- function(x = NULL, y = NULL) {
+right_click <- function(x = NULL, y = NULL, ask = TRUE) {
+  if (ask) {
+    ans <- askYesNo("Do you agree to perform a right mouse click?")
+    if (!isTRUE(ans)) tool_reject()
+  }
   cmd <- "cliclick p:"
   position <- system(cmd, intern = TRUE)
   coords <- unlist(strsplit(position, ","))
@@ -11,6 +15,7 @@ right_click <- function(x = NULL, y = NULL) {
 #' Tool: Right mouse click
 #'
 #' Returns a tool object for performing a right mouse click at the given (x, y) screen coordinates.
+#' @param ask Boolean. If `TRUE` (default), ask for confirmation before performing the click.
 #' @examples
 #' \dontrun{
 #'   chat <- ellmer::chat_openai()
@@ -18,7 +23,10 @@ right_click <- function(x = NULL, y = NULL) {
 #'   chat$chat("Right click at position 100, 200")
 #' }
 #' @export
-tool_right_click <- function() {
+tool_right_click <- function(ask = TRUE) {
+  right_click <- function(x = NULL, y = NULL) {
+    ns$right_click(x, y, ask = ask)
+  }
   tool(
     right_click,
     "Performs a right mouse click at the given (x, y) screen coordinates. If x and y are not provided, clicks at the current mouse position.",

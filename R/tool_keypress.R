@@ -1,4 +1,8 @@
-keypress <- function(key, control = FALSE, command = FALSE, shift = FALSE, option = FALSE, fn = FALSE) {
+keypress <- function(key, control = FALSE, command = FALSE, shift = FALSE, option = FALSE, fn = FALSE, ask = TRUE) {
+  if (ask) {
+    ans <- askYesNo(sprintf("Do you agree to simulate keypress: %s?", key))
+    if (!isTRUE(ans)) tool_reject()
+  }
   key_map <- c(
     "F1" = 122, "F2" = 120, "F3" = 99, "F4" = 118, "F5" = 96, "F6" = 97,
     "F7" = 98, "F8" = 100, "F9" = 101, "F10" = 109, "F11" = 103, "F12" = 111,
@@ -50,6 +54,7 @@ keypress <- function(key, control = FALSE, command = FALSE, shift = FALSE, optio
 #' Tool: Keypress
 #'
 #' Returns a tool object for simulating a keypress (with optional modifiers).
+#' @param ask Boolean. If `TRUE` (default), ask for confirmation before simulating the keypress.
 #' @examples
 #' \dontrun{
 #'   chat <- ellmer::chat_openai()
@@ -57,7 +62,10 @@ keypress <- function(key, control = FALSE, command = FALSE, shift = FALSE, optio
 #'   chat$chat("Press the Enter key")
 #' }
 #' @export
-tool_keypress <- function() {
+tool_keypress <- function(ask = TRUE) {
+  keypress <- function(key, control = FALSE, command = FALSE, shift = FALSE, option = FALSE, fn = FALSE) {
+    ns$keypress(key, control, command, shift, option, fn, ask = ask)
+  }
   tool(
     keypress,
     "Simulates a keypress (with optional modifiers). Make sure we know which system is used and which app is active so we can avoid for example using a Windows hotkey on Mac, or a standard hotkey for an app that does things differently.",

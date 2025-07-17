@@ -4,7 +4,10 @@
 \alias{tool_write_to_file}
 \title{Tool: Write to File}
 \usage{
-tool_write_to_file()
+tool_write_to_file(ask = TRUE)
+}
+\arguments{
+\item{ask}{Boolean. If \code{TRUE} (default), ask for confirmation before writing to the file.}
 }
 \value{
 A tool object

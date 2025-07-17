@@ -11,6 +11,7 @@ run_r_command <- function(expr, ask = TRUE) {
 #' Tool: Run R command
 #'
 #' Returns a tool object for running an R command (expression) and returning its output as a string.
+#' @param ask Boolean. If `TRUE` (default), ask for confirmation before running the R command.
 #' @examples
 #' \dontrun{
 #'   chat <- ellmer::chat_openai()
@@ -18,7 +19,10 @@ run_r_command <- function(expr, ask = TRUE) {
 #'   chat$chat("Run the R command '1 + 1'")
 #' }
 #' @export
-tool_run_r_command <- function() {
+tool_run_r_command <- function(ask = TRUE) {
+  run_r_command <- function(expr) {
+    ns$run_r_command(expr, ask = ask)
+  }
   tool(
     run_r_command,
     "Runs an R command (expression) and returns its output as a string. Asks for confirmation before running.",

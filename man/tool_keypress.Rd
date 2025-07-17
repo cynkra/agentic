@@ -4,7 +4,10 @@
 \alias{tool_keypress}
 \title{Tool: Keypress}
 \usage{
-tool_keypress()
+tool_keypress(ask = TRUE)
+}
+\arguments{
+\item{ask}{Boolean. If \code{TRUE} (default), ask for confirmation before simulating the keypress.}
 }
 \description{
 Returns a tool object for simulating a keypress (with optional modifiers).

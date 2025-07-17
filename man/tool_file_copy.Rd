@@ -4,7 +4,10 @@
 \alias{tool_file_copy}
 \title{Tool: File copy}
 \usage{
-tool_file_copy()
+tool_file_copy(ask = TRUE)
+}
+\arguments{
+\item{ask}{Boolean. If \code{TRUE} (default), ask for confirmation before copying the file.}
 }
 \description{
 Returns a tool object for copying a file from one path to another.

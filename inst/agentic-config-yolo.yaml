@@ -1,0 +1,37 @@
+global:
+  model: openai/gpt-4.1
+  ask: console  # or 'popup'
+
+tools:
+  - agentic::tool_copy_to_clipboard
+  - agentic::tool_file_copy:
+      ask: false
+  - agentic::tool_file_delete:
+      ask: false
+  - agentic::tool_file_rename:
+      ask: false
+  - agentic::tool_keypress:
+      ask: false
+  - agentic::tool_left_click:
+      ask: false
+  - agentic::tool_list_files
+  - agentic::tool_multiple_choices
+  - agentic::tool_popup
+  - agentic::tool_query_image
+  - agentic::tool_read_from_file
+  - agentic::tool_record_audio
+  - agentic::tool_right_click:
+      ask: false
+  - agentic::tool_run_r_command
+  - agentic::tool_run_terminal_command:
+      ask: false
+  - agentic::tool_screenshot
+  - agentic::tool_session_info
+  - agentic::tool_speech_to_text
+  - agentic::tool_system_info
+  - agentic::tool_text_input
+  - agentic::tool_text_to_speech
+  - agentic::tool_wait
+  - agentic::tool_working_directory
+  - agentic::tool_write_to_file:
+      ask: false 

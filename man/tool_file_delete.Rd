@@ -4,7 +4,10 @@
 \alias{tool_file_delete}
 \title{Tool: Delete a file}
 \usage{
-tool_file_delete()
+tool_file_delete(ask = TRUE)
+}
+\arguments{
+\item{ask}{Boolean. If \code{TRUE} (default), ask for confirmation before deleting the file.}
 }
 \description{
 Returns a tool object for deleting a specified file.

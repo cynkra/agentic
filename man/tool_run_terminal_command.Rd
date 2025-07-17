@@ -4,7 +4,7 @@
 \alias{tool_run_terminal_command}
 \title{Tool: Run terminal command}
 \usage{
-tool_run_terminal_command()
+tool_run_terminal_command(ask = TRUE)
 }
 \description{
 Returns a tool object for running a shell command in the system terminal and returning its output as a string.

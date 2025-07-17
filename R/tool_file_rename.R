@@ -1,10 +1,15 @@
-file_rename <- function(from, to) {
+file_rename <- function(from, to, ask = TRUE) {
+  if (ask) {
+    ans <- askYesNo(sprintf("Do you agree to rename/move the file: %s to %s?", from, to))
+    if (!isTRUE(ans)) tool_reject()
+  }
   file.rename(from, to)
 }
 
 #' Tool: File Rename
 #'
 #' Renames or moves a file from one path to another. Returns TRUE if successful.
+#' @param ask Boolean. If `TRUE` (default), ask for confirmation before renaming the file.
 #' @examples
 #' \dontrun{
 #'   chat <- ellmer::chat_openai()
@@ -15,7 +20,10 @@ file_rename <- function(from, to) {
 #'   chat$chat(paste("Rename the file", src, "to", dest))
 #' }
 #' @export
-tool_file_rename <- function() {
+tool_file_rename <- function(ask = TRUE) {
+  file_rename <- function(from, to) {
+    ns$file_rename(from, to, ask = ask)
+  }
   tool(
     file_rename,
     "Renames or moves a file from one path to another. Returns TRUE if successful.",

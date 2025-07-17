@@ -1,11 +1,16 @@
 
-file_delete <- function(path) {
+file_delete <- function(path, ask = TRUE) {
+  if (ask) {
+    ans <- askYesNo(sprintf("Do you agree to delete the file: %s?", path))
+    if (!isTRUE(ans)) tool_reject()
+  }
   file.remove(path)
 }
 
 #' Tool: Delete a file
 #'
 #' Returns a tool object for deleting a specified file.
+#' @param ask Boolean. If `TRUE` (default), ask for confirmation before deleting the file.
 #' @examples
 #' \dontrun{
 #'   chat <- ellmer::chat_openai()
@@ -15,7 +20,10 @@ file_delete <- function(path) {
 #'   chat$chat(paste("Delete the file", tmp))
 #' }
 #' @export
-tool_file_delete <- function() {
+tool_file_delete <- function(ask = TRUE) {
+  file_delete <- function(path) {
+    ns$file_delete(path, ask = ask)
+  }
   tool(
     file_delete,
     "Deletes the specified file. Returns TRUE if successful.",
