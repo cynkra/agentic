@@ -39,7 +39,17 @@ popup <- function(message, title = "Popup", type = "info", buttons = NULL) {
   }
 }
 
-
+#' Tool: Popup
+#'
+#' Shows a popup message to the user.
+#'
+#' @examples
+#' \dontrun{
+#'   chat <- ellmer::chat_openai()
+#'   chat$register_tool(tool_popup())
+#'   chat$chat("Show a popup saying 'Hello, world!'")
+#' }
+#' @export
 tool_popup <- function() {
   tool(
     popup,
@@ -57,12 +67,3 @@ tool_popup <- function() {
     )
   )
 }
-
-#' Returns a tool object for showing a popup message to the user.
-#' @examples
-#' \dontrun{
-#'   chat <- ellmer::chat_openai()
-#'   chat$register_tool(tool_popup())
-#'   chat$chat("Show a popup saying 'Hello, world!'")
-#' }
-#' @export
