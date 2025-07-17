@@ -1,5 +1,4 @@
 run_terminal_command <- function(command, ask = TRUE) {
-  #browser()
   if (ask) {
     ans <- askYesNo(sprintf("Do you agree to run `%s`", command))
     if (!isTRUE(ans)) tool_reject()

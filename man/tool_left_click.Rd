@@ -4,7 +4,10 @@
 \alias{tool_left_click}
 \title{Tool: Left mouse click}
 \usage{
-tool_left_click()
+tool_left_click(ask = TRUE)
+}
+\arguments{
+\item{ask}{Boolean. If \code{TRUE} (default), ask for confirmation before performing the click.}
 }
 \description{
 Returns a tool object for performing a left mouse click at the given (x, y) screen coordinates.

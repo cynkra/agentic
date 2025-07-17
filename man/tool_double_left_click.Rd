@@ -4,7 +4,10 @@
 \alias{tool_double_left_click}
 \title{Tool: Double left mouse click}
 \usage{
-tool_double_left_click()
+tool_double_left_click(ask = TRUE)
+}
+\arguments{
+\item{ask}{Boolean. If \code{TRUE} (default), ask for confirmation before performing the double click.}
 }
 \description{
 Returns a tool object for performing a double left mouse click at the given (x, y) screen coordinates.

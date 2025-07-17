@@ -1,4 +1,8 @@
-write_to_file <- function(path, content) {
+write_to_file <- function(path, content, ask = TRUE) {
+  if (ask) {
+    ans <- askYesNo(sprintf("Do you agree to write to the file: %s?", path))
+    if (!isTRUE(ans)) tool_reject()
+  }
   writeLines(content, con = path)
   invisible(path)
 }
@@ -6,6 +10,7 @@ write_to_file <- function(path, content) {
 #' Tool: Write to File
 #'
 #' Returns a tool for writing a character string to a flat file at the specified path.
+#' @param ask Boolean. If `TRUE` (default), ask for confirmation before writing to the file.
 #' @return A tool object
 #' @export
 #' @examples
@@ -15,7 +20,10 @@ write_to_file <- function(path, content) {
 #'   tmp <- tempfile()
 #'   chat$chat(paste("Write 'hello' to the file", tmp))
 #' }
-tool_write_to_file <- function() {
+tool_write_to_file <- function(ask = TRUE) {
+  write_to_file <- function(path, content) {
+    agentic:::write_to_file(path, content, ask = ask)
+  }
   tool(
     write_to_file,
     "Writes a character string to a flat file at the specified path.",

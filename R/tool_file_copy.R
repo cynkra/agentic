@@ -1,12 +1,20 @@
-file_copy <- function(from, to) {
+file_copy <- function(from, to, ask = TRUE) {
+  if (ask) {
+    ans <- askYesNo(sprintf("Do you agree to copy the file: %s to %s?", from, to))
+    if (!isTRUE(ans)) tool_reject()
+  }
   file.copy(from, to)
 }
 
 #' Tool: File copy
 #'
 #' Returns a tool object for copying a file from one path to another.
+#' @param ask Boolean. If `TRUE` (default), ask for confirmation before copying the file.
 #' @export
-tool_file_copy <- function() {
+tool_file_copy <- function(ask = TRUE) {
+  file_copy <- function(from, to) {
+    agentic:::file_copy(from, to, ask = ask)
+  }
   tool(
     file_copy,
     "Copies a file from one path to another. Returns TRUE if successful.",

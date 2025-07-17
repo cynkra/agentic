@@ -4,7 +4,10 @@
 \alias{tool_right_click}
 \title{Tool: Right mouse click}
 \usage{
-tool_right_click()
+tool_right_click(ask = TRUE)
+}
+\arguments{
+\item{ask}{Boolean. If \code{TRUE} (default), ask for confirmation before performing the click.}
 }
 \description{
 Returns a tool object for performing a right mouse click at the given (x, y) screen coordinates.
