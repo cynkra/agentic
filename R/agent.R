@@ -37,9 +37,8 @@ agent <- function(system_prompt = NULL, ..., model = NULL) {
 }
 
 all_tools <- function() {
-  agentic_ns <- asNamespace("agentic")
-  tool_fun_nms <- ls(agentic_ns, pattern = "^tool_")
-  tool_funs <-  mget(tool_fun_nms, agentic_ns)
+  tool_fun_nms <- ls(ns, pattern = "^tool_")
+  tool_funs <-  mget(tool_fun_nms, ns)
   # keep default args for all tools
   empty_args <- list()
   tools <- lapply(tool_funs, function(f) do.call(f, empty_args))
@@ -55,12 +54,12 @@ system_prompt_from_rules_md <- function() {
 config_from_yaml <- function(env) {
   if (file.exists("agentic-config.yaml")) {
     config <- yaml::read_yaml("agentic-config.yaml")
-    config$tools <- lapply(config$tools, tool_from_yaml_item, env)
+    config$tools <- lapply(config$tools, get_tool_from_yaml_item, env)
     config
   }
 }
 
-tool_from_yaml_item <- function(x, env) {
+get_tool_from_yaml_item <- function(x, env) {
   if (is.character(x)) {
     tool_fun <- eval(str2lang(x), env)
     tool <- do.call(tool_fun, list())
