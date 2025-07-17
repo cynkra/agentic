@@ -9,6 +9,9 @@ use_agentic(ask = TRUE, dir = ".")
 \arguments{
 \item{dir}{The directory in which to place the configuration and rules files. Defaults to the current working directory.}
 }
+\value{
+Returns \code{NULL} invisibly. Called for side effects.
+}
 \description{
 This function copies 'agentic-config.yaml' and 'agentic-rules.md' from the package's inst/ directory
 to the specified directory (default: current working directory), overwriting any existing files.

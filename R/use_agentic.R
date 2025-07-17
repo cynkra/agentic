@@ -4,7 +4,7 @@
 #' to the specified directory (default: current working directory), overwriting any existing files.
 #'
 #' @param dir The directory in which to place the configuration and rules files. Defaults to the current working directory.
-#' @value Returns `NULL` invisibly. Called for side effects.
+#' @return Returns `NULL` invisibly. Called for side effects.
 #' @export
 use_agentic <- function(ask = TRUE, dir = ".") {
   rules_template <- system.file("agentic-config.yaml", package = "agentic")
