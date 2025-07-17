@@ -16,38 +16,64 @@
 #' @export
 agent <- function(system_prompt = NULL, ..., model = NULL) {
   pf <- parent.frame()
-  agentic.ask <- getOption("agentic.ask")
-  agentic_ns <- asNamespace("agentic")
-  if (is.null(system_prompt) && file.exists("agentic-rules.md")) {
-    system_prompt <- readLines("agentic-rules.md")
-  }
-  if (file.exists("agentic-config.yaml")) {
-    config <- yaml::read_yaml("agentic-config.yaml")
-    model <- model %||% config$global$model
-    agentic.ask <- agentic.ask %||% config$global$ask
-    config$tools <- lapply(config$tools, \(x) if (is.character(x)) setNames(list(list(list())), x) else x)
 
-    tool_funs <- names(config$tools)
-    tools <- lapply(config$tools, \(x) {
-      do.call(eval(str2lang(names(x)), pf), do.call(c, x[[1]]))
-  })
-  } else {
-    tool_funs <- ls(agentic_ns, pattern = "^tool_")
-    tools <- lapply(do.call, mget(ls(agentic_ns, pattern = "^tool_"), agentic_ns), list())
-  }
-  model <- model %||% "openai/gpt-4.1"
-  model_split <- strsplit(model, "/")[[1]]
-  model <- model_split[[2]]
-  provider <- model_split[[1]]
-  agentic.ask <- agentic.ask %||% "console"
+  # process args and files 
+  config <- config_from_yaml(pf)
+  system_prompt <- system_prompt %||% system_prompt_from_rules_md()
+  tools <- config$tools %||% all_tools()
+  model <- model %||% config$model
+  agentic.ask <- config$ask %||% getOption("agentic.ask", default = "console")
+  mp <- fetch_model_and_provider(model)
+
+  # create chat and register tools
   withr::local_options(agentic.ask = agentic.ask)
-
-  chat_fun_nm <- paste0("chat_", provider)
+  chat_fun_nm <- paste0("chat_", mp[["provider"]])
   chat_fun <- getFromNamespace(chat_fun_nm, "ellmer")
-
-  ag <- chat_fun(system_prompt = system_prompt, model = model, ..., echo = "output")
+  ag <- chat_fun(system_prompt = system_prompt, model = mp[["model"]], ..., echo = "output")
   for (tool in tools) {
     ag$register_tool(tool)
   }
   ag
+}
+
+all_tools <- function() {
+  agentic_ns <- asNamespace("agentic")
+  tool_fun_nms <- ls(agentic_ns, pattern = "^tool_")
+  tool_funs <-  mget(tool_funs, agentic_ns)
+  # keep default args for all tools
+  empty_args <- list()
+  tools <- lapply(do.call, tool_funs, empty_args)
+  tools
+}
+
+system_prompt_from_rules_md <- function() {
+  if (file.exists("agentic-rules.md")) {
+    readLines("agentic-rules.md")
+  }
+}
+
+config_from_yaml <- function(env) {
+  if (file.exists("agentic-config.yaml")) {
+    config <- yaml::read_yaml("agentic-config.yaml")
+    config$tools <- lapply(config$tools, tool_from_yaml_item, env)
+    config
+  }
+}
+
+tool_from_yaml_item <- function(x, env) {
+  if (is.character(x)) {
+    tool_fun <- eval(str2lang(x), env)
+    tool <- do.call(tool_fun, list())
+    return(tool)
+  }
+  tool_fun <- eval(str2lang(names(x)), env)
+  tool <- do.call(tool_fun, x[[1]])
+  tool
+}
+
+fetch_model_and_provider <- function(model) {
+  model <- model %||% "openai/gpt-4.1"
+  model_provider <- strsplit(model, "/")[[1]]
+  names(model_provider) <- c("provider", "model")
+  model_provider
 }
