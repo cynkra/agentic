@@ -1,8 +1,0 @@
-global:
-  model: "openai/gpt-4.1"
-  ask: console # oralternative is popup
-
-tools:
-  - agentic::tool_session_info
-  - agentic::tool_run_terminal_command:
-      - ask: true
