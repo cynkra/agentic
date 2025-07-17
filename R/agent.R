@@ -39,10 +39,10 @@ agent <- function(system_prompt = NULL, ..., model = NULL) {
 all_tools <- function() {
   agentic_ns <- asNamespace("agentic")
   tool_fun_nms <- ls(agentic_ns, pattern = "^tool_")
-  tool_funs <-  mget(tool_funs, agentic_ns)
+  tool_funs <-  mget(tool_fun_nms, agentic_ns)
   # keep default args for all tools
   empty_args <- list()
-  tools <- lapply(do.call, tool_funs, empty_args)
+  tools <- lapply(tool_funs, function(f) do.call(f, empty_args))
   tools
 }
 
