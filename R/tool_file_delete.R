@@ -22,7 +22,7 @@ file_delete <- function(path, ask = TRUE) {
 #' @export
 tool_file_delete <- function(ask = TRUE) {
   file_delete <- function(path) {
-    agentic:::file_delete(path, ask = ask)
+    ns$file_delete(path, ask = ask)
   }
   tool(
     file_delete,

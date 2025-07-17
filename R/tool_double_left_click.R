@@ -20,7 +20,7 @@ double_left_click <- function(x = NULL, y = NULL, ask = TRUE) {
 #' @export
 tool_double_left_click <- function(ask = TRUE) {
   double_left_click <- function(x = NULL, y = NULL) {
-    agentic:::double_left_click(x, y, ask = ask)
+    ns$double_left_click(x, y, ask = ask)
   }
   tool(
     double_left_click,

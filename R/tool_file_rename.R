@@ -22,7 +22,7 @@ file_rename <- function(from, to, ask = TRUE) {
 #' @export
 tool_file_rename <- function(ask = TRUE) {
   file_rename <- function(from, to) {
-    agentic:::file_rename(from, to, ask = ask)
+    ns$file_rename(from, to, ask = ask)
   }
   tool(
     file_rename,

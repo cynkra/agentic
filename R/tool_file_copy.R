@@ -13,7 +13,7 @@ file_copy <- function(from, to, ask = TRUE) {
 #' @export
 tool_file_copy <- function(ask = TRUE) {
   file_copy <- function(from, to) {
-    agentic:::file_copy(from, to, ask = ask)
+    ns$file_copy(from, to, ask = ask)
   }
   tool(
     file_copy,

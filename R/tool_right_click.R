@@ -25,7 +25,7 @@ right_click <- function(x = NULL, y = NULL, ask = TRUE) {
 #' @export
 tool_right_click <- function(ask = TRUE) {
   right_click <- function(x = NULL, y = NULL) {
-    agentic:::right_click(x, y, ask = ask)
+    ns$right_click(x, y, ask = ask)
   }
   tool(
     right_click,

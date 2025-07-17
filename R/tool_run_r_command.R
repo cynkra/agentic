@@ -21,7 +21,7 @@ run_r_command <- function(expr, ask = TRUE) {
 #' @export
 tool_run_r_command <- function(ask = TRUE) {
   run_r_command <- function(expr) {
-    agentic:::run_r_command(expr, ask = ask)
+    ns$run_r_command(expr, ask = ask)
   }
   tool(
     run_r_command,

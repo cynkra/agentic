@@ -19,7 +19,7 @@ run_terminal_command <- function(command, ask = TRUE) {
 #' @export
 tool_run_terminal_command <- function(ask = TRUE) {
   run_terminal_command <- function(command) {
-    agentic:::run_terminal_command(command, ask = ask)
+    ns$run_terminal_command(command, ask = ask)
   }
   tool(
     run_terminal_command,

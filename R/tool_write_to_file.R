@@ -22,7 +22,7 @@ write_to_file <- function(path, content, ask = TRUE) {
 #' }
 tool_write_to_file <- function(ask = TRUE) {
   write_to_file <- function(path, content) {
-    agentic:::write_to_file(path, content, ask = ask)
+    ns$write_to_file(path, content, ask = ask)
   }
   tool(
     write_to_file,

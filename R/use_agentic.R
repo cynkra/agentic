@@ -4,6 +4,7 @@
 #' to the specified directory (default: current working directory), overwriting any existing files.
 #'
 #' @param dir The directory in which to place the configuration and rules files. Defaults to the current working directory.
+#' @param ask Boolean. If `TRUE` (default), ask for confirmation before overwriting files.
 #' @return Returns `NULL` invisibly. Called for side effects.
 #' @export
 use_agentic <- function(ask = TRUE, dir = ".") {

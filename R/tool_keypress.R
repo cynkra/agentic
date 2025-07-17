@@ -64,7 +64,7 @@ keypress <- function(key, control = FALSE, command = FALSE, shift = FALSE, optio
 #' @export
 tool_keypress <- function(ask = TRUE) {
   keypress <- function(key, control = FALSE, command = FALSE, shift = FALSE, option = FALSE, fn = FALSE) {
-    agentic:::keypress(key, control, command, shift, option, fn, ask = ask)
+    ns$keypress(key, control, command, shift, option, fn, ask = ask)
   }
   tool(
     keypress,

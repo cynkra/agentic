@@ -1,6 +1,8 @@
 #' @keywords internal
 "_PACKAGE"
 
+ns <- environment()
+
 ## usethis namespace: start
 #' @importFrom ellmer tool
 #' @importFrom ellmer tool_annotations

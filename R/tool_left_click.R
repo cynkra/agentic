@@ -25,7 +25,7 @@ left_click <- function(x = NULL, y = NULL, ask = TRUE) {
 #' @export
 tool_left_click <- function(ask = TRUE) {
   left_click <- function(x = NULL, y = NULL) {
-    agentic:::left_click(x, y, ask = ask)
+    ns$left_click(x, y, ask = ask)
   }
   tool(
     left_click,
