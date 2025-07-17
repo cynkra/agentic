@@ -7,6 +7,8 @@
 use_agentic(ask = TRUE, dir = ".")
 }
 \arguments{
+\item{ask}{Boolean. If \code{TRUE} (default), ask for confirmation before overwriting files.}
+
 \item{dir}{The directory in which to place the configuration and rules files. Defaults to the current working directory.}
 }
 \value{
