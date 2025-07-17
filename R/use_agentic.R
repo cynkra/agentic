@@ -8,7 +8,7 @@
 #' @return Returns `NULL` invisibly. Called for side effects.
 #' @export
 use_agentic <- function(ask = TRUE, dir = ".") {
-  rules_template <- system.file("agentic-config.yaml", package = "agentic")
+  rules_template <- system.file("agentic-rules.md", package = "agentic")
   if (ask) {
     config_template <- system.file("agentic-config.yaml", package = "agentic")
   } else {
