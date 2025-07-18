@@ -4,7 +4,13 @@
 \alias{agent}
 \title{Create an agent with all agentic tools}
 \usage{
-agent(system_prompt = NULL, ..., model = NULL)
+agent(
+  system_prompt = NULL,
+  ...,
+  model = NULL,
+  config = "agentic-config.yaml",
+  rules = "agentic-rules.md"
+)
 }
 \arguments{
 \item{system_prompt}{The system prompt.
@@ -15,6 +21,10 @@ To force an empty system prompt over 'agentic-rules.md' use \code{system_prompt 
 \item{...}{Additional arguments passed to the chat function for the provider.}
 
 \item{model}{The model in the form "provider/model", defaults to "openai/gpt-4.1"}
+
+\item{config}{Path to a config YAML file. Defaults to "agentic-config.yaml".}
+
+\item{rules}{Path to a rules markdown file. Defaults to "agentic-rules.md".}
 }
 \value{
 An Chat object with all agentic tools registered.
