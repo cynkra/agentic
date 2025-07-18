@@ -18,53 +18,43 @@
 #' @param statuses Controls access to commit statuses. 'read': view statuses; 'write': set commit statuses.
 #' @return A named list representing the YAML 'permissions' block.
 #' @details
-#' Valid values for each permission are 'read', 'write', or NULL. Some permissions only support a subset (see GitHub docs). Defaults are NULL, which means the permission is not set and both read and write are disallowed unless explicitly set. You may specify both 'read' and 'write' for permissions that support both.
+#' Each permission can be 'none', 'read', or 'write'. Only permissions not set to 'none' will be included in the output.
 #' @examples
-#' permissions(contents = c("read", "write"), issues = "write")
+#' permissions(contents = "read", issues = "write")
 #' permissions() # default block (all permissions unset)
 #' @export
 permissions <- function(
-  actions = NULL,
-  attestations = NULL,
-  checks = NULL,
-  contents = NULL,
-  deployments = NULL,
-  discussions = NULL,
-  id_token = NULL,
-  issues = NULL,
-  packages = NULL,
-  pages = NULL,
-  pull_requests = NULL,
-  repository_projects = NULL,
-  security_events = NULL,
-  statuses = NULL
+  actions = "none",
+  attestations = "none",
+  checks = "none",
+  contents = "none",
+  deployments = "none",
+  discussions = "none",
+  id_token = "none",
+  issues = "none",
+  packages = "none",
+  pages = "none",
+  pull_requests = "none",
+  repository_projects = "none",
+  security_events = "none",
+  statuses = "none"
 ) {
-  out <- list()
-  validate <- function(val, allowed, nm) {
-    if (is.null(val)) {
-      return(NULL)
-    }
-    if (all(val %in% allowed)) {
-      return(as.list(unique(val)))
-    }
-    stop(sprintf("`%s` must be 'read', 'write', a vector with both, or NULL", nm))
-  }
-  out[["actions"]] <- validate(actions, c("read", "write"), "actions")
-  out[["attestations"]] <- validate(attestations, c("read", "write"), "attestations")
-  out[["checks"]] <- validate(checks, c("read", "write"), "checks")
-  out[["contents"]] <- validate(contents, c("read", "write"), "contents")
-  out[["deployments"]] <- validate(deployments, c("read", "write"), "deployments")
-  out[["discussions"]] <- validate(discussions, c("read", "write"), "discussions")
-  out[["id-token"]] <- validate(id_token, c("write"), "id_token")
-  out[["issues"]] <- validate(issues, c("read", "write"), "issues")
-  out[["packages"]] <- validate(packages, c("read", "write"), "packages")
-  out[["pages"]] <- validate(pages, c("read", "write"), "pages")
-  out[["pull-requests"]] <- validate(pull_requests, c("read", "write"), "pull_requests")
-  out[["repository-projects"]] <- validate(repository_projects, c("read", "write"), "repository_projects")
-  out[["security-events"]] <- validate(security_events, c("read", "write"), "security_events")
-  out[["statuses"]] <- validate(statuses, c("read", "write"), "statuses")
-  # Remove NULLs
-  out <- out[!vapply(out, is.null, logical(1))]
-  if (length(out) == 0) return(list(permissions = "~"))
-  list(permissions = out)
-} 
+  permissions <- c(
+    actions = match.arg(actions, c("none", "read", "write")),
+    attestations = match.arg(attestations, c("none", "read", "write")),
+    checks = match.arg(checks, c("none", "read", "write")),
+    contents = match.arg(contents, c("none", "read", "write")),
+    deployments = match.arg(deployments, c("none", "read", "write")),
+    discussions = match.arg(discussions, c("none", "read", "write")),
+    id_token = match.arg(id_token, c("none", "write")),
+    issues = match.arg(issues, c("none", "read", "write")),
+    packages = match.arg(packages, c("none", "read", "write")),
+    pages = match.arg(pages, c("none", "read", "write")),
+    pull_requests = match.arg(pull_requests, c("none", "read", "write")),
+    repository_projects = match.arg(repository_projects, c("none", "read", "write")),
+    security_events = match.arg(security_events, c("none", "read", "write")),
+    statuses = match.arg(statuses, c("none", "read", "write"))
+  )
+  permissions <- permissions[permissions != "none"]
+  list(permissions = as.list(permissions))
+}

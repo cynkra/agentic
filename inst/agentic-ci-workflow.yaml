@@ -1,11 +1,10 @@
 name: {{workflow_name}}
 
-on: {{on_block}}
+{{on_block}}
 
-permissions: {{permissions_block}}
+{{permissions_block}}
 
-env:
-{{providers_block}}
+{{env_block}}
 
 jobs:
   agentic:

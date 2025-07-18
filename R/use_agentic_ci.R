@@ -12,18 +12,15 @@ use_agentic_ci <- function(workflow_name, on, permissions, secrets) {
   dir.create(".github/agentic", showWarnings = FALSE)
 
   env_block <- build_env_block(secrets) 
-  on_block <- yaml::as.yaml(list(on = on))
+  # unquoting the `on` just to be pretty 
+  on_block <- sub("'on'", "on", yaml::as.yaml(list(on = on)))
   permissions_block <- yaml::as.yaml(permissions)
-  # Write workflow file
-  workflow_template <- readLines(system.file("agentic-ci-workflow.yaml", package = "agentic", mustWork = TRUE))
 
-  workflow_path <- file.path(".github/workflows", paste0(workflow_name, ".yaml"))
-  writeLines(workflow, workflow_path)
   # Write config, rules, and script files using helpers
   use_agentic_ci_config(workflow_name)
   use_agentic_ci_rules(workflow_name, on_block, permissions_block)
   use_agentic_ci_r_script(workflow_name)
-  use_agentic_ci_workflow(workflow_name, on_block, permissions_block)
+  use_agentic_ci_workflow(workflow_name, on_block, permissions_block, env_block)
 }
 
 build_env_block <- function(secrets) {
@@ -48,8 +45,8 @@ use_agentic_ci_rules <- function(workflow_name, on_block, permissions_block) {
   content <- readLines(from)
   content <- paste(content, collapse = "\n")
   content <-  gsub("{{workflow_name}}", workflow_name, content, fixed = TRUE)
-  content <- gsub("{{on_block}}", on_block, content, fixed = TRUE)
-  content <- gsub("{{permissions_block}}", permissions_block, content, fixed = TRUE)
+  content <- sub("{{on_block}}", on_block, content, fixed = TRUE)
+  content <- sub("{{permissions_block}}", permissions_block, content, fixed = TRUE)
   to <- sprintf(".github/agentic/%s-rules.md", workflow_name)
   writeLines(content, to)
 }
@@ -63,13 +60,14 @@ use_agentic_ci_r_script <- function(workflow_name) {
   writeLines(content, to)
 }
 
-use_agentic_ci_workflow <- function(workflow_name, on_block, permissions_block) {
+use_agentic_ci_workflow <- function(workflow_name, on_block, permissions_block, env_block) {
   from <- system.file("agentic-ci-workflow.yaml", package = "agentic")
   content <- readLines(from)
-  content <- paste(rules, collapse = "\n")
+  content <- paste(content, collapse = "\n")
   content <-  gsub("{{workflow_name}}", workflow_name, content, fixed = TRUE)
-  content <- gsub("{{on_block}}", on_block, content, fixed = TRUE)
-  content <- gsub("{{permissions_block}}", permissions_block, rules, fixed = TRUE)
+  content <- sub("{{on_block}}", on_block, content, fixed = TRUE)
+  content <- sub("{{permissions_block}}", permissions_block, content, fixed = TRUE)
+  content <- sub("{{env_block}}", env_block, content, fixed = TRUE)
   to <- sprintf(".github/workflows/%s.yaml", workflow_name)
   writeLines(content, to)
 }
