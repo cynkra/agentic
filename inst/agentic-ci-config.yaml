@@ -1,0 +1,7 @@
+tools:
+  - tool_run_terminal_command:
+      ask: false
+  - tool_run_r_command:
+      ask: false
+  - tool_ga_event_context
+  - tool_ga_api 
