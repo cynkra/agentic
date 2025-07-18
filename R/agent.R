@@ -4,25 +4,25 @@
 #' registers all available agentic tools, and returns the agent object.
 #'
 #' @param system_prompt The system prompt. 
-#'   If not provided and if a file named `agentic-rules.md` is found in the working directory
+#'   If not provided and if a file named `agentic-rules.md` is found in the working directory 
 #'   its content will be used as the system prompt. 
 #'   To force an empty system prompt over 'agentic-rules.md' use `system_prompt = ""`.
 #' @param ... Additional arguments passed to the chat function for the provider.
 #' @param model The model in the form "provider/model", defaults to "openai/gpt-4.1"
+#' @param config Path to a config YAML file. Defaults to "agentic-config.yaml".
+#' @param rules Path to a rules markdown file. Defaults to "agentic-rules.md".
 #' @return An Chat object with all agentic tools registered.
 #' @examples
 #' ag <- agent()
 #' ag$chat("What time is it?")
 #' @export
-agent <- function(system_prompt = NULL, ..., model = NULL) {
-  pf <- parent.frame()
-
+agent <- function(system_prompt = NULL, ..., model = NULL, config = "agentic-config.yaml", rules = "agentic-rules.md") {
   # process args and files 
-  config <- config_from_yaml(pf)
-  system_prompt <- system_prompt %||% system_prompt_from_rules_md()
-  tools <- config$tools %||% all_tools()
-  model <- model %||% config$model
-  agentic.ask <- config$ask %||% getOption("agentic.ask", default = "console")
+  config_obj <- config_from_yaml(config, parent.frame())
+  system_prompt <- system_prompt %||% system_prompt_from_rules_md(rules)
+  tools <- config_obj$tools %||% all_tools()
+  model <- model %||% config_obj$model
+  agentic.ask <- config_obj$ask %||% getOption("agentic.ask", default = "console")
   mp <- fetch_model_and_provider(model)
 
   # create chat and register tools
@@ -45,15 +45,15 @@ all_tools <- function() {
   tools
 }
 
-system_prompt_from_rules_md <- function() {
-  if (file.exists("agentic-rules.md")) {
-    readLines("agentic-rules.md")
+system_prompt_from_rules_md <- function(rules_path) {
+  if (file.exists(rules_path)) {
+    readLines(rules_path)
   }
 }
 
-config_from_yaml <- function(env) {
-  if (file.exists("agentic-config.yaml")) {
-    config <- yaml::read_yaml("agentic-config.yaml")
+config_from_yaml <- function(config_path = NULL, env) {
+  if (file.exists(config_path)) {
+    config <- yaml::read_yaml(config_path)
     config$tools <- lapply(config$tools, get_tool_from_yaml_item, env)
     config
   }
