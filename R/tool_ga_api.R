@@ -20,9 +20,13 @@ ga_api <- function(endpoint, method = "GET", body = NULL, headers = NULL) {
     stop("Unsupported HTTP method: ", method)
   )
   status <- httr::status_code(req)
-  content <- httr::content(req, as = "text")
+  content <- httr::content(req)
   if (status < 200 || status >= 300) {
     tool_reject(sprintf("GitHub API call failed [%d]: %s", status, content))
+  }
+  if (is.raw(content)) {
+    message("decoding raw content")
+    content <- base64enc::base64decode(content)
   }
   content
 }
