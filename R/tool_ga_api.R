@@ -1,6 +1,7 @@
 ga_api <- function(endpoint, method = "GET", body = NULL, headers = NULL) {
   headers <- as.character(headers)
   if (!requireNamespace("httr", quietly = TRUE)) tool_reject("Please install the 'httr' package.")
+  if (!requireNamespace("base64enc", quietly = TRUE)) tool_reject("Please install the 'base64enc' package.")
   token <- Sys.getenv("GITHUB_TOKEN")
   if (token == "") tool_reject("GITHUB_TOKEN is not set in the environment.")
   base_url <- "https://api.github.com"
@@ -20,15 +21,14 @@ ga_api <- function(endpoint, method = "GET", body = NULL, headers = NULL) {
     stop("Unsupported HTTP method: ", method)
   )
   status <- httr::status_code(req)
-  content <- httr::content(req)
-  if (status < 200 || status >= 300) {
-    tool_reject(sprintf("GitHub API call failed [%d]: %s", status, content))
+  result <- httr::content(req, as = "parsed", type = "application/json")
+  if (!(status >= 200 && status < 300)) {
+    tool_reject(sprintf("GitHub API call failed [%d]: %s", status, httr::content(req, as = "text")))
   }
-  if (is.raw(content)) {
-    message("decoding raw content")
-    content <- base64enc::base64decode(content)
+  if (!is.null(result$content) && identical(result$encoding, "base64")) {
+    result$content <- rawToChar(base64enc::base64decode(result$content))
   }
-  content
+  return(result)
 }
 
 #' Tool: GA API (GitHub Actions API)
