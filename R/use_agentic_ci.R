@@ -28,6 +28,7 @@ build_env_block <- function(secrets) {
   env_block <- c(
     "env:",
     "  GITHUB_EVENT_PATH: ${{ github.event_path }}",
+    "  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}",
     paste0("  ", secret_block)
   )
   env_block <- paste(env_block, collapse = "\n")
@@ -71,3 +72,4 @@ use_agentic_ci_workflow <- function(workflow_name, on_block, permissions_block, 
   to <- sprintf(".github/workflows/%s.yaml", workflow_name)
   writeLines(content, to)
 }
+
