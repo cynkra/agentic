@@ -55,6 +55,7 @@ permissions <- function(
     security_events = match.arg(security_events, c("none", "read", "write")),
     statuses = match.arg(statuses, c("none", "read", "write"))
   )
+  names(permissions) <- sub("_", "-", names(permissions))
   permissions <- permissions[permissions != "none"]
   list(permissions = as.list(permissions))
 }
