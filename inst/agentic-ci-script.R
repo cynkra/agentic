@@ -1,25 +1,28 @@
 # This script is run by GitHub Actions for {{workflow_name}}
 library(agentic)
 
+# fetch the context, useful for most workflows
+event_path <- Sys.getenv("GITHUB_EVENT_PATH")
+event <- jsonlite::fromJSON(event_path)
 
-## example code to return early if the content doesn't start with "/agent"
-# event_path <- Sys.getenv("GITHUB_EVENT_PATH")
-# event <- jsonlite::fromJSON(event_path)
-# issue_body <- event$issue$body
 
-# # Early return if issue body does not start with '/agent'
-# if (!grepl('^/agent', issue_body)) {
-#   cat("[agentic] Issue does not start with /agent, exiting.\n")
-#   quit()
-# }
-
-# Build agent with config and rules
-ag <- agent(
-  config = ".github/agentic/{{workflow_name}}-config.yaml",
-  rules = ".github/agentic/{{workflow_name}}-rules.md"
-)
-
-# Run the agent on the issue body
-result <- ag$chat(issue_body)
-
-# TODO: example to post output as comment to current issue
+# example: workflow triggered on issue comment
+if (TRUE) {
+  issue_comment <- event$comment$body
+  # boilerplate to get comment content
+  issue_body <- event$issue$body
+  # optionally, query only if starts with a command, we could also require a speficic user etc.
+  # workflow is triggered anyway but will finish early if not satisfied
+  if (!startsWith(issue_comment, "/agent")) {
+    writeLines("Agent not required, quitting early")
+    quit() # quit R
+  }
+  # define the agent using appropriate config and rules
+  ag <- agent(
+    config = ".github/agentic/{{workflow_name}}-config.yaml",
+    rules = ".github/agentic/{{workflow_name}}-rules.md"
+  )
+  # assuming the comment is a question to the agent
+  issue_comment <- sub("^/agent", "", issue_comment)
+  ag$chat(issue_comment)
+}
