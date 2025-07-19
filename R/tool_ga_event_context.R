@@ -34,7 +34,7 @@ tool_ga_event_context <- function() {
     "Returns the value from the GitHub Actions event payload for a given dot-separated path.",
     path = type_string("The dot-separated path (e.g., 'issue.body' or 'pull_request.title').", required = TRUE),
     .annotations = tool_annotations(
-      title = "GA Event Context",
+      title = "Get Github Actions Event Context",
       read_only_hint = TRUE,
       open_world_hint = FALSE,
       idempotent_hint = TRUE,

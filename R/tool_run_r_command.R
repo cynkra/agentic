@@ -25,7 +25,7 @@ tool_run_r_command <- function(ask = TRUE) {
   }
   tool(
     run_r_command,
-    "Runs an R command (expression) and returns its output as a string. Asks for confirmation before running.",
+    "Runs an R command (expression) and returns its output as a string.",
     expr = type_string(
       "The R command (expression) to run.",
       required = TRUE
