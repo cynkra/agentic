@@ -27,10 +27,10 @@ jobs:
           Rscript -e "install.packages('pak', repos = c(CRAN = 'https://packagemanager.posit.co/cran/__linux__/jammy/latest'))"
       - name: Install agentic
         run: |
-          Rscript -e 'pak::pak("cynkra/agentic")'
+          Rscript -e 'pak::pak("cynkra/agentic", repos = c(CRAN = "https://packagemanager.posit.co/cran/__linux__/jammy/latest"))'
       - name: Install local package
         run: |
-          Rscript -e 'pak::pak(".")'
+          Rscript -e 'pak::pak(".", repos = c(CRAN = "https://packagemanager.posit.co/cran/__linux__/jammy/latest"))'
 
       - name: Run agentic script
         run: |
