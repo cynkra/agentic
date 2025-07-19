@@ -5,20 +5,20 @@
 \title{Generate a GitHub Actions 'permissions' block}
 \usage{
 permissions(
-  actions = NULL,
-  attestations = NULL,
-  checks = NULL,
-  contents = NULL,
-  deployments = NULL,
-  discussions = NULL,
-  id_token = NULL,
-  issues = NULL,
-  packages = NULL,
-  pages = NULL,
-  pull_requests = NULL,
-  repository_projects = NULL,
-  security_events = NULL,
-  statuses = NULL
+  actions = c("none", "read", "write"),
+  attestations = c("none", "read", "write"),
+  checks = c("none", "read", "write"),
+  contents = c("none", "read", "write"),
+  deployments = c("none", "read", "write"),
+  discussions = c("none", "read", "write"),
+  id_token = c("none", "write"),
+  issues = c("none", "read", "write"),
+  packages = c("none", "read", "write"),
+  pages = c("none", "read", "write"),
+  pull_requests = c("none", "read", "write"),
+  repository_projects = c("none", "read", "write"),
+  security_events = c("none", "read", "write"),
+  statuses = c("none", "read", "write")
 )
 }
 \arguments{
@@ -57,9 +57,9 @@ A named list representing the YAML 'permissions' block.
 Returns a list ready to be converted to a YAML block for the 'permissions' section of a GitHub Actions workflow.
 }
 \details{
-Valid values for each permission are 'read', 'write', or NULL. Some permissions only support a subset (see GitHub docs). Defaults are NULL, which means the permission is not set and both read and write are disallowed unless explicitly set. You may specify both 'read' and 'write' for permissions that support both.
+Each permission can be 'none', 'read', or 'write'. Only permissions not set to 'none' will be included in the output.
 }
 \examples{
-permissions(contents = c("read", "write"), issues = "write")
+permissions(contents = "read", issues = "write")
 permissions() # default block (all permissions unset)
 }

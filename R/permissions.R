@@ -24,36 +24,36 @@
 #' permissions() # default block (all permissions unset)
 #' @export
 permissions <- function(
-  actions = "none",
-  attestations = "none",
-  checks = "none",
-  contents = "none",
-  deployments = "none",
-  discussions = "none",
-  id_token = "none",
-  issues = "none",
-  packages = "none",
-  pages = "none",
-  pull_requests = "none",
-  repository_projects = "none",
-  security_events = "none",
-  statuses = "none"
+  actions = c("none", "read", "write"),
+  attestations = c("none", "read", "write"),
+  checks = c("none", "read", "write"),
+  contents = c("none", "read", "write"),
+  deployments = c("none", "read", "write"),
+  discussions = c("none", "read", "write"),
+  id_token = c("none", "write"),
+  issues = c("none", "read", "write"),
+  packages = c("none", "read", "write"),
+  pages = c("none", "read", "write"),
+  pull_requests = c("none", "read", "write"),
+  repository_projects = c("none", "read", "write"),
+  security_events = c("none", "read", "write"),
+  statuses = c("none", "read", "write")
 ) {
   permissions <- c(
-    actions = match.arg(actions, c("none", "read", "write")),
-    attestations = match.arg(attestations, c("none", "read", "write")),
-    checks = match.arg(checks, c("none", "read", "write")),
-    contents = match.arg(contents, c("none", "read", "write")),
-    deployments = match.arg(deployments, c("none", "read", "write")),
-    discussions = match.arg(discussions, c("none", "read", "write")),
-    id_token = match.arg(id_token, c("none", "write")),
-    issues = match.arg(issues, c("none", "read", "write")),
-    packages = match.arg(packages, c("none", "read", "write")),
-    pages = match.arg(pages, c("none", "read", "write")),
-    pull_requests = match.arg(pull_requests, c("none", "read", "write")),
-    repository_projects = match.arg(repository_projects, c("none", "read", "write")),
-    security_events = match.arg(security_events, c("none", "read", "write")),
-    statuses = match.arg(statuses, c("none", "read", "write"))
+    actions = match.arg(actions),
+    attestations = match.arg(attestations),
+    checks = match.arg(checks),
+    contents = match.arg(contents),
+    deployments = match.arg(deployments),
+    discussions = match.arg(discussions),
+    id_token = match.arg(id_token),
+    issues = match.arg(issues),
+    packages = match.arg(packages),
+    pages = match.arg(pages),
+    pull_requests = match.arg(pull_requests),
+    repository_projects = match.arg(repository_projects),
+    security_events = match.arg(security_events),
+    statuses = match.arg(statuses)
   )
   names(permissions) <- sub("_", "-", names(permissions))
   permissions <- permissions[permissions != "none"]
