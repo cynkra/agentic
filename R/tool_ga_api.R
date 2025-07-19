@@ -25,7 +25,7 @@ ga_api <- function(endpoint, method = "GET", body = NULL, headers = NULL) {
   }
   out <- httr::content(req, as = "parsed", type = "application/json")
   if (!is.null(out$content)) {
-    out$content <- base64enc::base64decode(out$content))
+    out$content <- base64enc::base64decode(out$content)
   }
   out
 }
