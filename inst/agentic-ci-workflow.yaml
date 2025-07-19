@@ -13,7 +13,6 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install system dependencies
         run: |
-#          sudo apt-get update # to win time
           sudo apt-get install -y libcurl4-openssl-dev
       - name: Cache R packages
         uses: actions/cache@v4
