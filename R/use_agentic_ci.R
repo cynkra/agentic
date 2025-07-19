@@ -37,7 +37,7 @@ build_env_block <- function(secrets) {
 use_agentic_ci_config <- function(workflow_name) {
   from <- system.file("agentic-ci-config.yaml", package = "agentic")
   to <- sprintf(".github/agentic/%s-config.yaml", workflow_name)
-  file.copy(from, to)
+  file.copy(from, to, overwrite = TRUE)
 }
 
 use_agentic_ci_rules <- function(workflow_name, on_block, permissions_block) {
