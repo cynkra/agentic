@@ -55,11 +55,11 @@ tool_ga_api <- function() {
     ),
     body = type_object(
       "Optional list to send as JSON body (for POST/PATCH/PUT).",
-      required = FALSE
+      .required = FALSE
     ),
     headers = type_object(
       "Optional named list of additional headers.",
-      required = FALSE
+      .required = FALSE
     ),
     .annotations = tool_annotations(
       title = "GitHub Actions API",
