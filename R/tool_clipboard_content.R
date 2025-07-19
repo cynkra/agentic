@@ -1,6 +1,6 @@
 clipboard_content <- function() {
   if (!requireNamespace("clipr", quietly = TRUE)) {
-    stop("The 'clipr' package is required. Please install it with install.packages('clipr').")
+    tool_reject("The 'clipr' package is required but not installed. Please install it with install.packages('clipr').")
   }
   clipr::read_clip() |> paste(collapse = "\n")
 }

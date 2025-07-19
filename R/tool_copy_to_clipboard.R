@@ -1,6 +1,6 @@
 copy_to_clipboard <- function(text) {
   if (!requireNamespace("clipr", quietly = TRUE)) {
-    stop("The 'clipr' package is required. Please install it with install.packages('clipr').")
+    tool_reject("The 'clipr' package is required but not installed. Please install it with install.packages('clipr').")
   }
   clipr::write_clip(text)
   invisible(TRUE)

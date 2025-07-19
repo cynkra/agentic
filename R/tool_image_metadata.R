@@ -1,6 +1,6 @@
 image_metadata <- function(path) {
   if (!requireNamespace("magick", quietly = TRUE)) {
-    stop("The 'magick' package is required. Please install it with install.packages('magick').")
+    tool_reject("The 'magick' package is required but not installed. Please install it with install.packages('magick').")
   }
   info <- magick::image_info(magick::image_read(path))
   list(
