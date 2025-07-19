@@ -1,4 +1,5 @@
 # This script is run by GitHub Actions for {{workflow_name}}
+options(repos = c(CRAN = "https://packagemanager.posit.co/cran/__linux__/jammy/latest"))
 library(agentic)
 
 # fetch the context, useful for most workflows

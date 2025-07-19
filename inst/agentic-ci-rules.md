@@ -10,7 +10,7 @@
 
 - The following tools were made available to you:
   - "Run Terminal Command" : Use for system-level tasks or when R tools are insufficient. For example install missing system dependencies or run cli tools. Never use it to fetch file content.
-  - "Run R Command" : Use to call R package functions or install packages. To install packages always use `pak::pak("<pkg>", repos = c(CRAN = "https://packagemanager.posit.co/cran/__linux__/jammy/latest"))`.
+  - "Run R Command" : Use to call R package functions or install packages. To install packages always use `pak::pak()`.
   - "Get Github Actions Event Context" : Use first to establish context for any user-triggered event.
   - "GitHub Actions API"  : Use for interacting with GitHub (fetching file content, commenting, labeling, etc).
 
