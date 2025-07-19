@@ -1,4 +1,5 @@
 ga_api <- function(endpoint, method = "GET", body = NULL, headers = NULL) {
+  headers <- as.character(headers)
   if (!requireNamespace("httr", quietly = TRUE)) stop("Please install the 'httr' package.")
   token <- Sys.getenv("GITHUB_TOKEN")
   if (token == "") stop("GITHUB_TOKEN is not set in the environment.")
@@ -8,11 +9,7 @@ ga_api <- function(endpoint, method = "GET", body = NULL, headers = NULL) {
     Authorization = paste("Bearer", token),
     Accept = "application/vnd.github+json"
   )
-  if (!is.null(headers)) {
-    all_headers <- c(default_headers, headers)
-  } else {
-    all_headers <- default_headers
-  }
+  all_headers <- c(default_headers, headers)
   req <- switch(
     toupper(method),
     GET = httr::GET(url, httr::add_headers(.headers = all_headers)),
