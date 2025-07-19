@@ -20,14 +20,11 @@ ga_api <- function(endpoint, method = "GET", body = NULL, headers = NULL) {
     stop("Unsupported HTTP method: ", method)
   )
   status <- httr::status_code(req)
+  content <- httr::content(req, as = "text")
   if (status < 200 || status >= 300) {
-    tool_reject(sprintf("GitHub API call failed [%d]: %s", status, httr::content(req, as = "text")))
+    tool_reject(sprintf("GitHub API call failed [%d]: %s", status, content))
   }
-  out <- httr::content(req, as = "parsed", type = "application/json")
-  if (!is.null(out$content)) {
-    out$content <- base64enc::base64decode(out$content)
-  }
-  out
+  content
 }
 
 #' Tool: GA API (GitHub Actions API)
