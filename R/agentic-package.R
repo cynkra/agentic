@@ -11,6 +11,7 @@ ns <- environment()
 #' @importFrom ellmer type_boolean
 #' @importFrom ellmer type_enum
 #' @importFrom ellmer type_integer
+#' @importFrom ellmer type_object
 #' @importFrom ellmer type_string
 #' @importFrom utils askYesNo
 #' @importFrom utils browseURL
