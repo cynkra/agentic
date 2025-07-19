@@ -9,10 +9,12 @@
 # Tools
 
 - The following tools were made available to you:
-  - "Run Terminal Command" : Use for system-level tasks or when R tools are insufficient. For example install missing system dependencies or run cli tools. Never use it to fetch file content.
-  - "Run R Command" : Use to call R package functions or install packages. To install packages always use `pak::pak()`.
-  - "Get Github Actions Event Context" : Use first to establish context for any user-triggered event.
-  - "GitHub Actions API"  : Use for interacting with GitHub (fetching file content, commenting, labeling, etc).
+  - "Run Terminal Command" : This will allow you to interrogate the system, install missing dependencies etc
+  - "Run R Command" : This will allow you to use R packages (or install some) etc. To install packages always use `pak::pak()`.
+  - "Get Github Actions Event Context" : This will allow you to know where you are, for instance in which issue you are, if triggered by an issue related trigger
+  - "GitHub Actions API GET", "GitHub Actions API POST", "GitHub Actions API DELETE",
+    "GitHub Actions API PATCH", "GitHub Actions API PUT":
+  - "GitHub Actions API DELETE": These allow you to make authenticated REST API calls to GitHub using the GITHUB_TOKEN provided by the runner. Use toc omment, to fetching file content, to label etc
 
 The repo might be private so you must never try to access files externally, with https://raw.githubusercontent.com/ or similar, use only the "GitHub Actions API" for these cases.
 

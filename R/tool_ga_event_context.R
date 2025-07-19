@@ -1,9 +1,3 @@
-#' Get value from GitHub Actions event context by path
-#'
-#' Parses the event JSON and returns the value at the given dot-separated path.
-#' @param path Dot-separated path (e.g., "issue.body" or "pull_request.title").
-#' @return The value at the specified path, or NULL if not found.
-#' @export
 ga_event_context <- function(path) {
   # in case the llm provides the full path rather than needed suffix
   path <- sub("^github\\.event\\.", "", path)

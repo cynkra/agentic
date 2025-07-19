@@ -4,4 +4,8 @@ tools:
   - tool_run_r_command:
       ask: false
   - tool_ga_event_context
-  - tool_ga_api 
+  - tool_ga_api_get
+  - tool_ga_api_post
+  - tool_ga_api_patch
+  - tool_ga_api_put
+  - tool_ga_api_delete 
