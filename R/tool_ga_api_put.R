@@ -1,5 +1,15 @@
 ga_api_put <- function(endpoint, body) {
-  if (!length(body)) tool_reject("PUT body must be a non-empty list.")
+  if (!length(body) || body == "") tool_reject("PUT body must be a non-empty JSON string.")
+  
+  # Parse JSON string to R object
+  body_obj <- tryCatch({
+    jsonlite::fromJSON(body)
+  }, error = function(e) {
+    tool_reject(paste("Invalid JSON in body:", e$message))
+  })
+  
+  if (length(body_obj) == 0) tool_reject("PUT body must contain non-empty content.")
+  
   token <- Sys.getenv("GITHUB_TOKEN")
   if (token == "") tool_reject("GITHUB_TOKEN is not set in the environment.")
   base_url <- "https://api.github.com"
@@ -8,7 +18,7 @@ ga_api_put <- function(endpoint, body) {
     Authorization = paste("Bearer", token),
     Accept = "application/vnd.github+json"
   )
-  req <- httr::PUT(url, httr::add_headers(.headers = default_headers), body = body, encode = "json")
+  req <- httr::PUT(url, httr::add_headers(.headers = default_headers), body = body_obj, encode = "json")
   status <- httr::status_code(req)
   result <- httr::content(req, as = "parsed", type = "application/json")
   if (!(status >= 200 && status < 300)) {
@@ -32,9 +42,9 @@ tool_ga_api_put <- function() {
       "The GitHub API endpoint (e.g., '/repos/owner/repo/issues/123/labels' for replacing issue labels, '/repos/owner/repo/issues/123/assignees' for setting issue assignees). :owner and :repo can be found in the event payload as `event.repository.owner.login` and `event.repository.name`",
       required = TRUE
     ),
-    body = type_object(
-      "A non-empty JSON object to send as body. This should NEVER be empty. For example, to replace issue labels: {\"labels\": [\"bug\", \"help wanted\"]}. For setting issue assignees: {\"assignees\": [\"username1\", \"username2\"]}.",
-      .required = TRUE
+    body = type_string(
+      "A JSON string to send as body. This should NEVER be empty. For example, to replace issue labels: '{\"labels\": [\"bug\", \"help wanted\"]}'. For setting issue assignees: '{\"assignees\": [\"username1\", \"username2\"]}'.",
+      required = TRUE
     ),
     .annotations = tool_annotations(
       title = "GitHub Actions API PUT",
