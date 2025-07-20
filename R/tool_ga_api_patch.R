@@ -29,11 +29,11 @@ tool_ga_api_patch <- function() {
     ga_api_patch,
     "Makes an authenticated PATCH call to the GitHub REST API using the GITHUB_TOKEN provided by the runner.",
     endpoint = type_string(
-      "The GitHub API endpoint (e.g., '/repos/:owner/:repo/issues/:issue_number/comments'). :owner and :repo can be found in the event payload as `event.repository.owner.login` and `event.repository.name`",
+      "The GitHub API endpoint (e.g., '/repos/owner/repo/issues/123' for updating an issue, '/repos/owner/repo/issues/comments/456' for updating a comment). :owner and :repo can be found in the event payload as `event.repository.owner.login` and `event.repository.name`",
       required = TRUE
     ),
     body = type_object(
-      "A non-empty list to send as JSON body.",
+      "A non-empty JSON object to send as body. This should NEVER be empty. For example, to update an issue: {\"title\": \"Updated title\", \"body\": \"Updated description\"}. For updating a comment: {\"body\": \"Updated comment text\"}.",
       .required = TRUE
     ),
     .annotations = tool_annotations(

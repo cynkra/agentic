@@ -29,11 +29,11 @@ tool_ga_api_put <- function() {
     ga_api_put,
     "Makes an authenticated PUT call to the GitHub REST API using the GITHUB_TOKEN provided by the runner.",
     endpoint = type_string(
-      "The GitHub API endpoint (e.g., '/repos/:owner/:repo/issues/:issue_number/comments'). :owner and :repo can be found in the event payload as `event.repository.owner.login` and `event.repository.name`",
+      "The GitHub API endpoint (e.g., '/repos/owner/repo/issues/123/labels' for replacing issue labels, '/repos/owner/repo/issues/123/assignees' for setting issue assignees). :owner and :repo can be found in the event payload as `event.repository.owner.login` and `event.repository.name`",
       required = TRUE
     ),
     body = type_object(
-      "A non-empty list to send as JSON body.",
+      "A non-empty JSON object to send as body. This should NEVER be empty. For example, to replace issue labels: {\"labels\": [\"bug\", \"help wanted\"]}. For setting issue assignees: {\"assignees\": [\"username1\", \"username2\"]}.",
       .required = TRUE
     ),
     .annotations = tool_annotations(

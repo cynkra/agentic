@@ -29,11 +29,11 @@ tool_ga_api_post <- function() {
     ga_api_post,
     "Makes an authenticated POST call to the GitHub REST API using the GITHUB_TOKEN provided by the runner.",
     endpoint = type_string(
-      "The GitHub API endpoint (e.g., '/repos/:owner/:repo/issues/:issue_number/comments'). :owner and :repo can be found in the event payload as `event.repository.owner.login` and `event.repository.name`",
+      "The GitHub API endpoint (e.g., '/repos/owner/repo/issues/123/comments' for posting a comment, '/repos/owner/repo/issues' for creating an issue). :owner and :repo can be found in the event payload as `event.repository.owner.login` and `event.repository.name`",
       required = TRUE
     ),
     body = type_object(
-      "A non-empty list to send as JSON body.",
+      "A non-empty JSON object to send as body. This should NEVER be empty. For example, to post a comment: {\"body\": \"Your comment text here\"}. For creating issues: {\"title\": \"Issue title\", \"body\": \"Issue description\"}.",
       .required = TRUE
     ),
     .annotations = tool_annotations(
