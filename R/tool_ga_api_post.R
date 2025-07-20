@@ -5,7 +5,7 @@ ga_api_post <- function(endpoint, body) {
   body_obj <- tryCatch({
     jsonlite::fromJSON(body)
   }, error = function(e) {
-    tool_reject(paste("Invalid JSON in body:", e$message))
+    tool_reject(paste("Invalid JSON in body. You provided a regular text string, but this tool expects a valid JSON string. For posting a comment, use: '{\"body\": \"Your comment text here\"}'. Error details:", e$message))
   })
   
   if (length(body_obj) == 0) tool_reject("POST body must contain non-empty content.")
@@ -43,7 +43,7 @@ tool_ga_api_post <- function() {
       required = TRUE
     ),
     body = type_string(
-      "A JSON string to send as body. This should NEVER be empty. For example, to post a comment: '{\"body\": \"Your comment text here\"}'. For creating issues: '{\"title\": \"Issue title\", \"body\": \"Issue description\"}'.",
+      "A JSON string with proper structure. DO NOT pass plain text. For posting a comment, use: '{\"body\": \"Your comment text here\"}'. For creating an issue, use: '{\"title\": \"Issue title\", \"body\": \"Issue description\"}'.",
       required = TRUE
     ),
     .annotations = tool_annotations(

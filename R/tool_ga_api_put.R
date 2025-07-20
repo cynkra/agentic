@@ -5,7 +5,7 @@ ga_api_put <- function(endpoint, body) {
   body_obj <- tryCatch({
     jsonlite::fromJSON(body)
   }, error = function(e) {
-    tool_reject(paste("Invalid JSON in body:", e$message))
+    tool_reject(paste("Invalid JSON in body. You provided a regular text string, but this tool expects a valid JSON string. For replacing labels, use: '{\"labels\": [\"bug\", \"help wanted\"]}'. Error details:", e$message))
   })
   
   if (length(body_obj) == 0) tool_reject("PUT body must contain non-empty content.")
@@ -43,7 +43,7 @@ tool_ga_api_put <- function() {
       required = TRUE
     ),
     body = type_string(
-      "A JSON string to send as body. This should NEVER be empty. For example, to replace issue labels: '{\"labels\": [\"bug\", \"help wanted\"]}'. For setting issue assignees: '{\"assignees\": [\"username1\", \"username2\"]}'.",
+      "A JSON string with proper structure. DO NOT pass plain text. For replacing issue labels, use: '{\"labels\": [\"bug\", \"help wanted\"]}'. For setting issue assignees, use: '{\"assignees\": [\"username1\", \"username2\"]}'.",
       required = TRUE
     ),
     .annotations = tool_annotations(

@@ -5,7 +5,7 @@ ga_api_patch <- function(endpoint, body) {
   body_obj <- tryCatch({
     jsonlite::fromJSON(body)
   }, error = function(e) {
-    tool_reject(paste("Invalid JSON in body:", e$message))
+    tool_reject(paste("Invalid JSON in body. You provided a regular text string, but this tool expects a valid JSON string. For updating an issue, use: '{\"title\": \"Updated title\", \"body\": \"Updated description\"}'. Error details:", e$message))
   })
   
   if (length(body_obj) == 0) tool_reject("PATCH body must contain non-empty content.")
@@ -43,7 +43,7 @@ tool_ga_api_patch <- function() {
       required = TRUE
     ),
     body = type_string(
-      "A JSON string to send as body. This should NEVER be empty. For example, to update an issue: '{\"title\": \"Updated title\", \"body\": \"Updated description\"}'. For updating a comment: '{\"body\": \"Updated comment text\"}'.",
+      "A JSON string with proper structure. DO NOT pass plain text. For updating an issue, use: '{\"title\": \"Updated title\", \"body\": \"Updated description\"}'. For updating a comment, use: '{\"body\": \"Updated comment text\"}'.",
       required = TRUE
     ),
     .annotations = tool_annotations(
